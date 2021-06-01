@@ -26,6 +26,7 @@ class InvoiceFactory extends Factory
 
         return [
             'member_id' => $this->faker->randomDigit,
+            'invoice_date' => $this->faker->date(),
             'due_date' => $this->faker->date(),
             'amount' => $this->faker->randomFloat(2, 2),
             'description' => $this->faker->words,

@@ -3,8 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Models\Invoice;
+use App\Models\Item;
+use App\Models\Member;
 use Illuminate\Http\Request;
+use App\Http\Requests\InvoiceRequest;
 use Illuminate\Support\Facades\DB;
+
+
 
 class InvoiceController extends Controller
 {
@@ -15,8 +20,9 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices=DB::table('invoices')->latest('created_at', 'desc')->paginate(10);
-        return view('invoices.index',compact('invoices'));
+        $invoices =Invoice::with('member')->latest('created_at', 'desc')->paginate(10);
+        //$invoices = DB::table('invoices')->latest('created_at', 'desc')->with('member')->paginate(10);
+        return view('invoices.index', compact('invoices'));
     }
 
     /**
@@ -26,7 +32,9 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        //
+        $members = DB::table('members')->select('id', 'fname', 'lname')->orderBy('fname', 'asc')->get();
+        //dd($members);
+        return view('invoices.create', compact('members'));
     }
 
     /**
@@ -35,9 +43,33 @@ class InvoiceController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(InvoiceRequest $request)
     {
-        //
+
+        
+        
+        
+        //begin transaction to safeguard against errors.
+        
+        DB::transaction(function () use ($request){
+           
+            $data['member_id'] = $request['member_id'];
+            $data['invoice_date'] = $request['invoice_date'];
+            $data['due_date'] = $request['due_date'];
+
+            $_SESSION['invoice_id'] = Invoice::create($data)->id;
+            $id=$_SESSION['invoice_id'];
+
+            $data['description'] = $request['desc'];
+            $data['qty'] = $request['qty'];
+            $data['amount'] = $request['amount'];
+            $data['invoice_id'] =$id;
+            Item::create($data);
+        }, 3);
+
+
+        //return response()->json(array('success' => true, 'message' => "Invoiced Saved Successfully"), 200);
+        return redirect()->route('invoice.show', $_SESSION['invoice_id'])->with('message','Invoice Saved successfully');
     }
 
     /**
@@ -48,7 +80,8 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-        //
+       
+        return view('invoices.show', compact('invoice'));
     }
 
     /**

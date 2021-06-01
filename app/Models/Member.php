@@ -22,4 +22,11 @@ class Member extends Model
         'left_on'
 
     ];
+
+    public function invoice(){
+        return $this->hasMany(Invoice::class);
+    }
+    public function item(){
+        return $this->hasManyThrough(Item::class,Invoice::class);
+    }
 }

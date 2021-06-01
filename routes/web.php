@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\FeeController;
 use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\ItemController;
 
 /*
 |--------------------------------------------------------------------------
@@ -25,6 +26,7 @@ Route::middleware(['auth'])->group(function (){
 Route::get('member-current',[MemberController::class,'current'])->name('member.current');
 Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
+Route::resource('item',ItemController::class);
 });
 
 Route::resource('fee', FeeController::class)->middleware('auth');
