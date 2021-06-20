@@ -29,4 +29,7 @@ class Member extends Model
     public function item(){
         return $this->hasManyThrough(Item::class,Invoice::class);
     }
+    public function payment(){
+        return $this->hasMany(Payment::class);
+    }
 }

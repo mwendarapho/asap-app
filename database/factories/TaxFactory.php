@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Fee;
+use App\Models\Tax;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class FeeFactory extends Factory
+class TaxFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Fee::class;
+    protected $model = Tax::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +22,12 @@ class FeeFactory extends Factory
     public function definition()
     {
         return [
-            'name'=>$this->faker->word(),
-            'amount'=>$this->faker->randomFloat(2,2,6),
+            //'code'=>['0%','8%','16%'],
+            //'rate'=>[0,0.08,0.16]
 
+            'code'=>$this->faker->bothify('Tx-##??'),
+            'rate'=>$this->faker->randomNumber(2),
         ];
+           
     }
 }

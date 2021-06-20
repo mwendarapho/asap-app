@@ -2,9 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
-use App\Http\Controllers\FeeController;
-use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\PaymentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +26,16 @@ Route::get('member-current',[MemberController::class,'current'])->name('member.c
 Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);
+Route::resource('payment',PaymentController::class);
+Route::get('statement', function () {
+    return view('statements.index');
+});
+//Route::get('receipt', function () {
+  //  return view('receipts.index');
+//});
 });
 
-Route::resource('fee', FeeController::class)->middleware('auth');
-Route::resource('subscription', SubscriptionController::class)->middleware('auth');
+
 
 Auth::routes();
 

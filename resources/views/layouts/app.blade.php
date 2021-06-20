@@ -42,10 +42,10 @@
                             <a class="nav-link" href="{{ route('member.index') }}">{{ __('Member') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('fee.index') }}">{{ __('Fees') }}</a>
+                            <a class="nav-link" href="{{ route('invoice.index') }}">{{ __('Invoice') }}</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ route('subscription.index') }}">{{ __('Subscription') }}</a>
+                            <a class="nav-link" href="{{ route('payment.index') }}">{{ __('Payment') }}</a>
                         </li>
 
                     </ul>

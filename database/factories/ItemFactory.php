@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Subscription;
+use App\Models\Item;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class SubscriptionFactory extends Factory
+class ItemFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Subscription::class;
+    protected $model = Item::class;
 
     /**
      * Define the model's default state.
@@ -22,8 +22,7 @@ class SubscriptionFactory extends Factory
     public function definition()
     {
         return [
-            'amount'=>$this->faker->randomFloat(2,2,6),
-            'sub_year'=>$this->faker->year()
+            //
         ];
     }
 }

@@ -8,11 +8,34 @@ use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\InvoiceRequest;
 use Illuminate\Support\Facades\DB;
+use App\Http\Traits\MemberTrait;
 
 
 
 class InvoiceController extends Controller
 {
+    use MemberTrait;
+    
+    //begin transaction to safeguard against errors.
+    public function createInvoice($request)
+    {
+        DB::transaction(function () use ($request) {
+
+            $data['member_id'] = $request['member_id'];
+            $data['invoice_date'] = $request['invoice_date'];
+            $data['due_date'] = $request['due_date'];
+
+            $_SESSION['invoice_id'] = Invoice::create($data)->id;
+            $id = $_SESSION['invoice_id'];
+
+            $data['description'] = $request['desc'];
+            $data['qty'] = $request['qty'];
+            $data['amount'] = $request['amount'];
+            $data['invoice_id'] = $id;
+            Item::create($data);
+        }, 3);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +43,7 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices =Invoice::with('member')->latest('created_at', 'desc')->paginate(10);
+        $invoices = Invoice::with('member')->latest('created_at', 'desc')->paginate(10);
         //$invoices = DB::table('invoices')->latest('created_at', 'desc')->with('member')->paginate(10);
         return view('invoices.index', compact('invoices'));
     }
@@ -32,8 +55,7 @@ class InvoiceController extends Controller
      */
     public function create()
     {
-        $members = DB::table('members')->select('id', 'fname', 'lname')->orderBy('fname', 'asc')->get();
-        //dd($members);
+        $members = $this->currentMembers();
         return view('invoices.create', compact('members'));
     }
 
@@ -45,31 +67,21 @@ class InvoiceController extends Controller
      */
     public function store(InvoiceRequest $request)
     {
+        //check if to invoice all members
+        if ($request['member_id'] == 000) {
+            $ids = Member::where('status', '=', true)->pluck('id');
+            foreach ($ids as $id) {
+                $request['member_id'] = $id;
+                $this->createInvoice($request);
+            }
 
-        
-        
-        
-        //begin transaction to safeguard against errors.
-        
-        DB::transaction(function () use ($request){
-           
-            $data['member_id'] = $request['member_id'];
-            $data['invoice_date'] = $request['invoice_date'];
-            $data['due_date'] = $request['due_date'];
-
-            $_SESSION['invoice_id'] = Invoice::create($data)->id;
-            $id=$_SESSION['invoice_id'];
-
-            $data['description'] = $request['desc'];
-            $data['qty'] = $request['qty'];
-            $data['amount'] = $request['amount'];
-            $data['invoice_id'] =$id;
-            Item::create($data);
-        }, 3);
-
+            //dd($request);
+        } else {
+            $this->createInvoice($request);
+        }
 
         //return response()->json(array('success' => true, 'message' => "Invoiced Saved Successfully"), 200);
-        return redirect()->route('invoice.show', $_SESSION['invoice_id'])->with('message','Invoice Saved successfully');
+        return redirect()->route('invoice.show', $_SESSION['invoice_id'])->with('message', 'Invoice Saved successfully');
     }
 
     /**
@@ -80,7 +92,7 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
-       
+
         return view('invoices.show', compact('invoice'));
     }
 

@@ -1,6 +1,6 @@
 @auth()
 
-<nav class="col-md-2 d-none d-md-block bg-light sidebar ">
+<nav class="col-md-2 d-none d-md-block bg-light sidebar d-print-none">
 
     <div class="sidebar-sticky">
 
@@ -13,24 +13,13 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('member.index') }}">
-                    <span data-feather="file"></span>
+                <span data-feather="users"></span>
                     Members
                 </a>
             </li>
+           
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('fee.index') }}">
-                    <span data-feather="shopping-cart"></span>
-                    Fees
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{route('subscription.index') }}">
-                    <span data-feather="users"></span>
-                    Subscriptions
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('payment')}}">
                     <span data-feather="bar-chart-2"></span>
                     Payments
                 </a>
@@ -63,17 +52,12 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{{ url('statement')}}">
                     <span data-feather="file-text"></span>
                     Statement
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <span data-feather="file-text"></span>
-                    Year-end sale
-                </a>
-            </li>
+            
         </ul>
     </div>
 </nav>

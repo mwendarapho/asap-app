@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Paymode;
 use Illuminate\Database\Seeder;
 
-class PaymentsSeeder extends Seeder
+class PaymodeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -13,6 +14,6 @@ class PaymentsSeeder extends Seeder
      */
     public function run()
     {
-        //
+        Paymode::factory(7)->create();
     }
 }

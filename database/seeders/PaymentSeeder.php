@@ -2,10 +2,10 @@
 
 namespace Database\Seeders;
 
-use App\Models\Fee;
+use App\Models\Payment;
 use Illuminate\Database\Seeder;
 
-class FeeSeeder extends Seeder
+class PaymentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,6 +14,6 @@ class FeeSeeder extends Seeder
      */
     public function run()
     {
-        Fee::factory(50)->create();
+        Payment::factory(10)->create();
     }
 }

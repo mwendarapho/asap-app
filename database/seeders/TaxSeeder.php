@@ -2,11 +2,10 @@
 
 namespace Database\Seeders;
 
-
-use App\Models\Subscription;
+use App\Models\Tax;
 use Illuminate\Database\Seeder;
 
-class SubscriptionSeeder extends Seeder
+class TaxSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,6 +14,6 @@ class SubscriptionSeeder extends Seeder
      */
     public function run()
     {
-        Subscription::factory(20)->create();
+        Tax::factory(3)->create();
     }
 }

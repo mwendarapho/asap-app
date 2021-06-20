@@ -2,11 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Fee;
+use App\Models\Payment;
 use Illuminate\Http\Request;
+use App\Http\Traits\MemberTrait;
 
-class FeeController extends Controller
+class PaymentController extends Controller
 {
+
+    use MemberTrait;
     /**
      * Display a listing of the resource.
      *
@@ -14,8 +17,11 @@ class FeeController extends Controller
      */
     public function index()
     {
-        $fees=Fee::paginate(10);
-        return view('fees.index',compact('fees'));
+        $payments = Payment::with('member')
+            ->with('paymode')
+            ->oldest('pay_date', 'asc')
+            ->paginate(10);
+        return view('receipts.index', compact('payments'));
     }
 
     /**
@@ -25,7 +31,10 @@ class FeeController extends Controller
      */
     public function create()
     {
-        return view('fees.create');
+        $members = $this->currentMembers();
+        $paymodes = $this->modeOfPayment();
+
+        return view('payment.create', compact(['members', 'paymodes']));
     }
 
     /**
@@ -36,39 +45,40 @@ class FeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Payment::create($request->all());
+
+        return redirect()->route('payment.index')->with('message', 'Payment saved successfully');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Fee  $fee
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function show(Fee $fee)
+    public function show(Payment $payment)
     {
-        //
+        return view('receipts.show', compact('payment'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Fee  $fee
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Fee $fee)
+    public function edit(Payment $payment)
     {
-        //
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Fee  $fee
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Fee $fee)
+    public function update(Request $request, Payment $payment)
     {
         //
     }
@@ -76,10 +86,10 @@ class FeeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Fee  $fee
+     * @param  \App\Models\Payment  $payment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Fee $fee)
+    public function destroy(Payment $payment)
     {
         //
     }

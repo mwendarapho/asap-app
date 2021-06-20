@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Create Invoice')
+@section('title','Create Payment')
 
 @section('content')
 <div class="container">
@@ -7,7 +7,7 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-header">
-                    <h3>{{ __('Create Invoice') }}</h3>
+                    <h3>{{ __('Create Receipt') }}</h3>
                 </div>
 
                 @if(Session::has('message'))
@@ -17,17 +17,17 @@
                 @endif
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('invoice.store') }}">
+                    <form method="POST" action="{{ route('payment.store') }}">
                         @csrf
 
 
                         <div class="form-group row">
-                            <label for="invoice_date" class="col-md-4 col-form-label text-md-right">{{ __('Invoice Date') }}</label>
+                            <label for="pay_date" class="col-md-4 col-form-label text-md-right">{{ __('Date Paid') }}</label>
 
                             <div class="col-md-6">
-                                <input id="invoice_date" type="date" class="form-control @error('invoice_date') is-invalid @enderror" name="invoice_date" value="{{ old('invoice_date') }}@php echo date('Y-m-d'); @endphp" required autocomplete="invoice_date">
+                                <input id="pay_date" type="date" class="form-control @error('pay_date') is-invalid @enderror" name="pay_date" value="{{ old('pay_date') }}@php echo date('Y-m-d'); @endphp" required autocomplete="pay_date">
 
-                                @error('invoice_date')
+                                @error('pay_date')
                                 <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>
@@ -35,27 +35,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="due_date" class="col-md-4 col-form-label text-md-right">{{ __('Due Date') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="due_date" type="date" class="form-control @error('due_date') is-invalid @enderror" name="due_date" value="{{ old('due_date') }}@php echo date('Y-m-d'); @endphp" required autocomplete="due_date">
-
-                                @error('due_date')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
-                            </div>
-                        </div>
                         <div class="form-group row">
                             <label for="member_id" class="col-md-4 col-form-label text-md-right">{{ __('Member') }}</label>
 
                             <div class="col-md-6">
 
                                 <select class="form-control @error('member_id') is-invalid @enderror" name="member_id" id="member_id" required>
-                                    <option value="">{{ 'Select Member' }}</option>
-                                    <option value="000">{{ 'All Members' }}</option>
+                                    <option value="" selected>{{ 'Choose Member' }}</option>
+
                                     @foreach($members as $member)
                                     <option value="{{ $member->id}}">{{$member->fname.' '.$member->lname }}</option>
                                     @endforeach
@@ -74,36 +62,39 @@
                         <!--Items lists start-->
 
                         <div class="row">
-                            <table class="table">
-                                <thead>
-                                    <th>Description</th>
-                                    <th>Qty</th>
+                            <table class="table table-bordered">
+                                <thead class=" table-dark">
+                                    
+                                    <th>Mode</th>
+                                    <th>Reference / Remarks</th>
                                     <th>Amount</th>
-                                    <th>Total</th>
-                                    <th class="d-print-none"><i data-feather="x"></i></th>
+
+
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td width="40%">
-                                            <input id="desc" type="text" class="form-control @error('desc') is-invalid @enderror" name="desc" value="{{ old('desc') }}" required autocomplete="description">
+                                      
+                                        <td width="20%">
+                                            <select class="form-control @error('paymode_id') is-invalid @enderror" name="paymode_id" id="paymode_id" required>
+                                                <option value="" selected>{{ 'Choose Mode' }}</option>
 
-                                            @error('desc')
+                                                @foreach($paymodes as $paymode)
+                                                <option value="{{ $paymode->id}}">{{ $paymode->name }}</option>
+                                                @endforeach
+
+
+                                            </select>
+                                        </td>
+                                        <td width="50%">
+                                            <input id="ref" type="text" class="form-control @error('ref') is-invalid @enderror" name="ref" value="{{ old('ref') }}" required autocomplete="ref">
+
+                                            @error('ref')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
-
                                         </td>
-                                        <td width="10%">
-                                            <input id="qty" type="number" min="1" class="form-control @error('qty') is-invalid @enderror" name="qty" value="{{ old('qty') }}" required autocomplete="qty">
-
-                                            @error('qty')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </td>
-                                        <td width="16%">
+                                        <td width="30%">
                                             <input id="amount" type="text" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required autocomplete="amount">
 
                                             @error('amount')
@@ -111,11 +102,6 @@
                                                 <strong>{{ $message }}</strong>
                                             </span>
                                             @enderror
-                                        </td>
-                                        <td width="17%"><input id="total" type="text" class="form-control" value="" disabled></td>
-                                        <td width="17%">
-                                            <btn id="delete" class="btn btn-danger btn-sm"><i data-feather="x"></i>Del</btn>
-                                            <btn id="add" class="btn btn-success btn-sm"><i data-feather="plus"></i>Add</btn>
                                         </td>
                                     </tr>
 

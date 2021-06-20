@@ -2,6 +2,7 @@
 @extends('layouts.app')
 @section('content')
 <div class="container py-3">
+<h1>Invoices</h1>
         <a href="{{ route('invoice.create') }}" class="btn btn-sm btn-success">Create Invoice</a>
 
     </div>

@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Payments;
-use Illuminate\Http\Request;
+use App\Models\Item;
+use App\Http\Requests\ItemRequest;
+use App\Models\Invoice;
 
-class PaymentsController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -33,18 +34,31 @@ class PaymentsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ItemRequest $request)
     {
-        //
+        //dd($request);
+
+        //$data=$request->all();
+        $data['member_id']=$request['member_id'];
+        $data['invoice_date']=$request['invoice_date']; 
+        $data['due_date']=$request['due_date']; 
+
+        $id=Invoice::create($data)->id;
+        
+
+
+        $id=Item::create($data)->id;
+        //$data['invoice_id']=
+        return response()->json(array('success' => true, 'last_insert_id' => $id), 200);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Payments  $payments
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function show(Payments $payments)
+    public function show(Item $item)
     {
         //
     }
@@ -52,10 +66,10 @@ class PaymentsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Payments  $payments
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function edit(Payments $payments)
+    public function edit(Item $item)
     {
         //
     }
@@ -64,10 +78,10 @@ class PaymentsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payments  $payments
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Payments $payments)
+    public function update(Request $request, Item $item)
     {
         //
     }
@@ -75,10 +89,10 @@ class PaymentsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Payments  $payments
+     * @param  \App\Models\Item  $item
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payments $payments)
+    public function destroy(Item $item)
     {
         //
     }

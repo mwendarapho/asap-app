@@ -2,17 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Payments;
+use App\Models\Paymode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class PaymentsFactory extends Factory
+class PaymodeFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Payments::class;
+    protected $model = Paymode::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +22,7 @@ class PaymentsFactory extends Factory
     public function definition()
     {
         return [
-            'amount'=>$this->faker->randomFloat(8,2),
-            'pay_date'=>$this->faker->dateTime('now'),
-           // 'member_id'=>$this->faker->
-
+            'name' =>$this->faker->word(),
         ];
     }
 }
