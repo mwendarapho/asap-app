@@ -56,7 +56,7 @@
                                 <td class="font-weight-bold">{{$invoice->member->fname}} {{$invoice->member->lname}}
                                     <br>{{$invoice->member->address}}<br>{{$invoice->member->email}}<br>{{$invoice->member->phone}}
                                 </td>
-                                <td class="font-weight-bold"> Test Organization <br>P.O Box 10028-00100, Lusaka Rd<br> Nairobi</td>
+                                <td class="font-weight-bold"> Test Organization <br>P.O Box 10028-00100, A23 Rd<br> Nairobi</td>
                             </tr>
                         </tbody>
                     </table>
