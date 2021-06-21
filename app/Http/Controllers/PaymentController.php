@@ -27,13 +27,13 @@ class PaymentController extends Controller
 
     public function statement(Request $request)
     {
-        $request->member_id=2;
+        //$request->member_id=2;
         $transactions = DB::table('members as T1')
                         ->leftjoin('payments as T2','T1.id','=','T2.member_id')
                         ->leftjoin('invoices as T3', 'T1.id','=','T3.member_id')
                         ->leftjoin('items as T4','T3.id','=','T4.invoice_id')
                         ->select('T1.fname','T1.lname','T2.pay_date','T2.amount as credit','T2.id','T4.amount as debit')
-                        ->where('T1.id', '=',$request->member_id)
+                        //->where('T1.id', '=',$request->member_id)
                         ->get();
         
         //Payment::with('member')
