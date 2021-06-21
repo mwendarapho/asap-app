@@ -2,16 +2,7 @@
 @section('title','Statement')
 
 @section('content')
-@php
-$doc_no=0;
-$amount=0;
-$member_id=0;
-$balance=0;
-$debit=0;
-$credit=0;
-$tdebit=0;
-$tcredit=0;
-@endphp
+
 
 <div class="container-fluid">
     <div class="row">
@@ -34,24 +25,34 @@ $tcredit=0;
                     </tr>
                 </thead>
                 <tbody>
-                    @for ($i = 0; $i < 10; $i++) @php $doc_no=rand(10,1000); $debit=rand(1000,100000); $credit=rand(0,10000); $member_id=rand(1,10); @endphp <tr>
+                    @php
+                    $debit=0;
+                    $credit=0;
+                    $tcredit=0;
+                    $tdebit=0;
+                    $balance=0;
+                    @endphp
+                    @foreach($transactions as $transaction)
+                    <tr>
                         <td>2021-06-10</td>
-                        <td><a href="{{'receipt/'.$doc_no}}"><span data-feather="arrow-right-circle" class="small text-success d-print-none"></span></a>RCT{{$doc_no}}</td>
-                        <td>{{$member_id}}</td>
+                        <td><a href="{{'receipt/'.$transaction->id}}">
+                                <span data-feather="arrow-right-circle" class="small text-success d-print-none"></span>
+                            </a>{{$transaction->id}}</td>
+                        <td>{{$transaction->fname}}</td>
                         <td>Ivoice</td>
-                        <td>{{ number_format($debit, 2) }}</td>
-                        <td>{{ number_format($credit, 2) }}</td>
+                        <td>{{ number_format($debit=$transaction->debit, 2) }}</td>
+                        <td>{{ number_format($credit=$transaction->credit, 2) }}</td>
                         <td>
                             @php
-                            
+
                             $tdebit+=$debit;
                             $tcredit+=$credit;
                             $balance=$tdebit-$tcredit;
                             @endphp
                             {{ number_format($balance,2) }}
                         </td>
-                        </tr>
-                        @endfor
+                    </tr>
+                    @endforeach
                 <tfoot>
                     <tr>
                         <th></th>

@@ -16,9 +16,7 @@ use App\Http\Controllers\PaymentController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+
 
 Route::resource('member', MemberController::class)->middleware('auth');
 Route::middleware(['auth'])->group(function (){
@@ -27,8 +25,13 @@ Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);
 Route::resource('payment',PaymentController::class);
-Route::get('statement', function () {
-    return view('statements.index');
+//Route::get('statement', function () {
+    //return view('statements.index');
+//});
+Route::get('statement',[PaymentController::class,'statement'])->name('statement');
+Route::get('/', function () {
+  //return view('welcome');
+  return view('home');
 });
 //Route::get('receipt', function () {
   //  return view('receipts.index');
