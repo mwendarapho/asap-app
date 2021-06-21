@@ -19,8 +19,8 @@
                         <th scope="col">Doc No</th>
                         <th scope="col">Member</th>
                         <th scope="col">Category</th>
-                        <th scope="col">Debit[KES]</th>
-                        <th scope="col">Credit[KES]</th>
+                        <th scope="col">Owed[KES]</th>
+                        <th scope="col">Paid[KES]</th>
                         <th scope="col">R-Balacnce[KES]</th>
                     </tr>
                 </thead>
@@ -35,19 +35,19 @@
                     @foreach($transactions as $transaction)
                     <tr>
                         <td>2021-06-10</td>
-                        <td><a href="{{'receipt/'.$transaction->id}}">
+                        <td><a href="{{ ($transaction->owed ==0 ? 'payment' : 'invoice').'/'.$transaction->docno}}">
                                 <span data-feather="arrow-right-circle" class="small text-success d-print-none"></span>
-                            </a>{{$transaction->id}}</td>
-                        <td>{{$transaction->fname}}</td>
-                        <td>Ivoice</td>
-                        <td>{{ number_format($debit=$transaction->debit, 2) }}</td>
-                        <td>{{ number_format($credit=$transaction->credit, 2) }}</td>
+                            </a>{{ ($transaction->owed ==0 ? 'RCT' : 'INV'). $transaction->docno}}</td>
+                        <td>{{$transaction->fname .' '.$transaction->lname }}</td>
+                        <td>{{ ($transaction->owed ==0 ? 'RCT' : 'INV') }}</td>
+                        <td>{{ number_format($debit=$transaction->owed, 2) }}</td>
+                        <td>{{ number_format($credit=$transaction->paid, 2) }}</td>
                         <td>
                             @php
 
                             $tdebit+=$debit;
                             $tcredit+=$credit;
-                            $balance=$tdebit-$tcredit;
+                            $balance= abs($tdebit-$tcredit);
                             @endphp
                             {{ number_format($balance,2) }}
                         </td>

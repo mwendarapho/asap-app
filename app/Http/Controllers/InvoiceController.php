@@ -43,8 +43,14 @@ class InvoiceController extends Controller
      */
     public function index()
     {
-        $invoices = Invoice::with('member')->latest('created_at', 'desc')->paginate(10);
-        //$invoices = DB::table('invoices')->latest('created_at', 'desc')->with('member')->paginate(10);
+
+        $invoices ="select T1.id as docno,T1.member_id,T1.due_date as date ,T1.invoice_date as inv_date, sum(T2.amount) as amount,'INV' as doctype, T3.fname, T3.lname
+        from invoices T1 
+        join items T2 on T1.id=T2.invoice_id
+        join members T3 on T1.member_id=T3.id
+        group by T2.invoice_id";
+        $invoices = DB::select(DB::raw($invoices));
+        //dd($invoices);
         return view('invoices.index', compact('invoices'));
     }
 

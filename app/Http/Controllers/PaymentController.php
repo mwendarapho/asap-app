@@ -27,21 +27,32 @@ class PaymentController extends Controller
 
     public function statement(Request $request)
     {
-        //$request->member_id=2;
-        $transactions = DB::table('members as T1')
-                        ->leftjoin('payments as T2','T1.id','=','T2.member_id')
-                        ->leftjoin('invoices as T3', 'T1.id','=','T3.member_id')
-                        ->leftjoin('items as T4','T3.id','=','T4.invoice_id')
-                        ->select('T1.fname','T1.lname','T2.pay_date','T2.amount as credit','T2.id','T4.amount as debit')
-                        //->where('T1.id', '=',$request->member_id)
-                        ->get();
-        
-        //Payment::with('member')
-            //->with('paymode')
-            //->with('invoice')
-            //->oldest('pay_date', 'asc')
-            //->paginate(10);
-           //dd($transactions);
+        //$request->member_id = 29;
+    
+        $transactions = "select  docno, member_id,date,T5.fname,T5.lname,
+                        sum(case when doctype = 'INV' then amount else 0 end) owed,
+                        sum(case when doctype = 'RCT' then amount else 0 end) paid
+
+                        from
+
+                        (
+                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.amount) as amount,'INV' as doctype
+                        from invoices T1 join items T2 on T1.id=T2.invoice_id
+                        group by T2.invoice_id
+
+                        union all
+
+                        select T3.id as docno,T3.member_id, T3.pay_date as date,  T3.amount,'RCT' as doctype
+                        from payments T3
+
+                        ) T4 
+                        join members T5 on T4.member_id=T5.id
+
+                        #WHERE T4.member_id=3
+                        GROUP BY T4.docno,T4.member_id,T4.date";
+
+        //dd($transactions);
+        $transactions = DB::select(DB::raw($transactions));
         return view('statements.index', compact('transactions'));
     }
 
