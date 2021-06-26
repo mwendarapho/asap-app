@@ -17,6 +17,12 @@
                     Members
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('invoice.index') }}">
+                    <span data-feather="layers"></span>
+                    Invoices
+                </a>
+            </li>
            
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('payment')}}">
@@ -24,10 +30,11 @@
                     Payments
                 </a>
             </li>
+            
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('invoice.index') }}">
-                    <span data-feather="layers"></span>
-                    Invoices
+                <a class="nav-link" href="{{ url('statement')}}">
+                    <span data-feather="file-text"></span>
+                    Statement
                 </a>
             </li>
         </ul>
@@ -51,12 +58,7 @@
                    Past Members
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ url('statement')}}">
-                    <span data-feather="file-text"></span>
-                    Statement
-                </a>
-            </li>
+           
             
         </ul>
     </div>

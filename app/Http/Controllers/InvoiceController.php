@@ -15,7 +15,7 @@ use App\Http\Traits\MemberTrait;
 class InvoiceController extends Controller
 {
     use MemberTrait;
-    
+
     //begin transaction to safeguard against errors.
     public function createInvoice($request)
     {
@@ -44,7 +44,7 @@ class InvoiceController extends Controller
     public function index()
     {
 
-        $invoices ="select T1.id as docno,T1.member_id,T1.due_date as date ,T1.invoice_date as inv_date, sum(T2.amount) as amount,'INV' as doctype, T3.fname, T3.lname
+        $invoices = "select T1.id as docno,T1.member_id,T1.due_date as date ,T1.invoice_date as inv_date, sum(T2.amount) as amount,'INV' as doctype, T3.fname, T3.lname
         from invoices T1 
         join items T2 on T1.id=T2.invoice_id
         join members T3 on T1.member_id=T3.id
@@ -98,8 +98,19 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
+        //DB::enableQueryLog();
 
-        return view('invoices.show', compact('invoice'));
+        $totalinvoice = Invoice::count();
+
+        $items = DB::table('items')
+            ->select('qty', 'description', 'amount')
+            ->where('invoice_id', '=', $invoice->id)
+            ->get();
+
+
+        return view('invoices.show', compact(['invoice', 'items', 'totalinvoice']));
+        //$log = DB::getQueryLog();
+        //dump($log);
     }
 
     /**

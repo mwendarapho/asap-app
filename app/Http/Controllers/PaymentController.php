@@ -51,8 +51,9 @@ class PaymentController extends Controller
                         #WHERE T4.member_id=3
                         GROUP BY T4.docno,T4.member_id,T4.date";
 
-        //dd($transactions);
+       
         $transactions = DB::select(DB::raw($transactions));
+        //dd($transactions);
         return view('statements.index', compact('transactions'));
     }
 
@@ -90,6 +91,8 @@ class PaymentController extends Controller
      */
     public function show(Payment $payment)
     {
+
+        
         return view('receipts.show', compact('payment'));
     }
 
