@@ -44,8 +44,8 @@ class InvoiceController extends Controller
     public function index()
     {
 
-        $invoices = "select T1.id as docno,T1.member_id,T1.due_date as date ,T1.invoice_date as inv_date, sum(T2.amount) as amount,'INV' as doctype, T3.fname, T3.lname
-        from invoices T1 
+        $invoices = "select T1.id as docno,T1.member_id,T1.due_date as date ,T1.invoice_date as inv_date, sum(T2.qty*T2.amount) as amount,'INV' as doctype, T3.fname, T3.lname
+        from invoices T1
         join items T2 on T1.id=T2.invoice_id
         join members T3 on T1.member_id=T3.id
         group by T2.invoice_id";

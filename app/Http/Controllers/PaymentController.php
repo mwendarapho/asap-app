@@ -27,34 +27,67 @@ class PaymentController extends Controller
 
     public function statement(Request $request)
     {
-        //$request->member_id = 29;
-    
+
+        $from_date= $request->from_date;
+        $to_date=$request->to_date;
+
         $transactions = "select  docno, member_id,date,T5.fname,T5.lname,
                         sum(case when doctype = 'INV' then amount else 0 end) owed,
                         sum(case when doctype = 'RCT' then amount else 0 end) paid
-
                         from
-
                         (
-                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.amount) as amount,'INV' as doctype
+                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
                         from invoices T1 join items T2 on T1.id=T2.invoice_id
                         group by T2.invoice_id
-
                         union all
-
                         select T3.id as docno,T3.member_id, T3.pay_date as date,  T3.amount,'RCT' as doctype
                         from payments T3
-
-                        ) T4 
+                        ) T4
                         join members T5 on T4.member_id=T5.id
+                        WHERE T4.member_id=$request->member_id
+                        and date >= '$from_date'
+                            and   date <= '$to_date'
 
-                        #WHERE T4.member_id=3
-                        GROUP BY T4.docno,T4.member_id,T4.date";
+                        GROUP BY T4.docno";
 
-       
+
         $transactions = DB::select(DB::raw($transactions));
-        //dd($transactions);
+        //AND $request->to_date
+       // dd($transactions);
+
         return view('statements.index', compact('transactions'));
+    }
+
+    public function statement1(Request $request)
+    {
+        $data=$request->all();
+
+       //dd($request->all());
+       //$balanceBF=$this->balanceBroughtForward($data['from_date'],$data['member_id']);
+
+        $transactions = DB::table('invoices as T1')
+        ->join('items as T2', 'T1.id', '=', 'T2.invoice_id')
+        //->join('members as T3', 'T1.member_id', '=', 'T3.id')
+        ->select('T1.id as docno', 'T2.amount', 'T1.member_id', 'T1.due_date as date')
+        ->groupby('T2.invoice_id')
+        //->sum('T2.amount');
+                        ->get();
+
+
+
+
+
+        dd($transactions);
+        $paymenttotal = DB::table('payments as T1')
+            ->join('members as T2', 'T1.member_id', '=', 'T2.id')
+            ->select('T1.id as docno','T1.member_id','T1.amount','T1.pay_date')
+            //->union($transactions)
+            ->get();
+        //print_r($paymenttotal);
+        return view('statements.index', compact(['transactions','balanceBF']));
+        //$members = $this->currentMembers();
+       // return view('statements.member_statement',compact('members'));
+
     }
 
     /**
@@ -92,7 +125,7 @@ class PaymentController extends Controller
     public function show(Payment $payment)
     {
 
-        
+
         return view('receipts.show', compact('payment'));
     }
 
@@ -127,5 +160,27 @@ class PaymentController extends Controller
     public function destroy(Payment $payment)
     {
         //
+    }
+
+    public function statement100(Request $request){
+
+
+        $data=$request->all();
+
+        dd($data);
+
+
+        // DB::enableQueryLog();
+
+       dd($this->balanceBroughtForward($data['from_date'],$data['member_id']));
+       //$log = DB::getQueryLog();
+       //dump($log);
+
+    }
+
+    public function statementFilter(){
+        $members = $this->allMembers();
+        return view('statements.member_statement',compact('members'));
+
     }
 }

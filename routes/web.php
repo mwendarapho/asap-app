@@ -25,12 +25,15 @@ Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);
 Route::resource('payment',PaymentController::class);
-//Route::get('statement', function () {
-    //return view('statements.index');
-//});
-Route::get('statement',[PaymentController::class,'statement'])->name('statement');
+
+Route::post('statement100',[PaymentController::class,'statement100'])->name('statement100');
+Route::post('statement',[PaymentController::class,'statement'])->name('statement');
+Route::get('statement',[PaymentController::class,'statementFilter'])->name('statementFilter');
+
+
+
 Route::get('/', function () {
-  //return view('welcome');
+
   return view('home');
 });
 //Route::get('receipt', function () {
