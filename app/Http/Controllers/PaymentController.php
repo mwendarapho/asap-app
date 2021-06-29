@@ -31,6 +31,9 @@ class PaymentController extends Controller
         $from_date= $request->from_date;
         $to_date=$request->to_date;
 
+
+        $balBF=$this->balanceBroughtForward($from_date,$request->member_id);
+
         $transactions = "select  docno, member_id,date,T5.fname,T5.lname,
                         sum(case when doctype = 'INV' then amount else 0 end) owed,
                         sum(case when doctype = 'RCT' then amount else 0 end) paid
@@ -52,10 +55,9 @@ class PaymentController extends Controller
 
 
         $transactions = DB::select(DB::raw($transactions));
-        //AND $request->to_date
-       // dd($transactions);
 
-        return view('statements.index', compact('transactions'));
+
+        return view('statements.index', compact(['transactions','balBF']));
     }
 
     public function statement1(Request $request)

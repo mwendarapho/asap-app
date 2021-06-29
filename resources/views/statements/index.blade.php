@@ -34,12 +34,21 @@
                 </thead>
                 <tbody>
                     @php
-                    $debit=0;
-                    $credit=0;
-                    $tcredit=0;
-                    $tdebit=0;
-                    $balance=0;
+                    $debit= $balBF['debit'];
+                    $credit= $balBF['credit'];
+                    $tcredit=$balBF['credit'];
+                    $tdebit=$balBF['debit'];
+                    $balance=abs($balBF['credit']-$balBF['debit']);
                     @endphp
+                    <tr>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th>B/F</th>
+                        <th>{{ number_format($debit,2) }}</th>
+                        <th>{{ number_format($credit,2) }}</th>
+                        <th>{{ number_format($balance,2) }}</th>
+                    </tr>
                     @foreach($transactions as $transaction)
                     <tr>
                         <td>{{$transaction->date}}</td>
@@ -70,6 +79,7 @@
                         <th>{{ number_format($tdebit,2) }}</th>
                         <th>{{ number_format($tcredit,2) }}</th>
                         <th>{{ number_format($balance,2) }}</th>
+                    </tr>
                 </tfoot>
                 </tfoot>
                 </tbody>
