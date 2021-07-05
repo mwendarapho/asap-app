@@ -119,7 +119,7 @@
     </script>
     @yield('scripts')
 
-
+@include('layouts.facebook_messager')
 </body>
 
 </html>
