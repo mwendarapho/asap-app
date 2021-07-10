@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Member Statement')
+@section('title','Statement')
 
 @section('content')
     <div class="container">
@@ -67,6 +67,7 @@
                                     <select class="form-control @error('member_id') is-invalid @enderror"
                                             name="member_id" id="member_id" required>
                                         <option value="" selected>{{ 'Choose Member' }}</option>
+                                        <option value="000" >{{ 'All Members' }}</option>
 
                                         @foreach($members as $member)
                                             <option

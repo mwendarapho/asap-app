@@ -1,4 +1,4 @@
-@section('title', 'Invoices |')
+@section('title', 'Invoices')
 @extends('layouts.app')
 @section('content')
 
@@ -37,7 +37,7 @@
                         <td>{{$invoice->due_date}}</td>
                     </tr>
                 </table>
-                
+
                 <div class="table-responsive p-2">
                     <table class="table table-borderless">
                         <tbody>
@@ -49,7 +49,7 @@
                                 <td class="font-weight-bold">{{$invoice->member->fname}} {{$invoice->member->lname}}
                                     <br>{{$invoice->member->address}}<br>{{$invoice->member->email}}<br>{{$invoice->member->phone}}
                                 </td>
-                                <td class="font-weight-bold"> Test Organization <br>P.O Box 10028-00100, A23 Rd<br> Nairobi</td>
+                                <td class="font-weight-bold"> {{env('ORG_NAME')}} <br>{{ env('ORG_ADDRESS') }}, {{env('ORG_CITY')}}<br>{{ env('ORG_PHONE') }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -105,8 +105,8 @@
                                 <td>Bank Details</td>
                             </tr>
                             <tr class="content">
-                                <td> Bank Name : ADS BANK <br> Swift Code : ADS1234Q <br> Account Holder : Jelly Pepper
-                                    <br> Account Number : 5454542WQR <br>
+                                <td> Bank Name : {{env('ORG_BANK')}} <br> Swift Code : {{ env('ORG_BANK_SWIFT_CODE') }} <br> Account Holder : {{env('ORG_ACCOUNT_NAME')}}
+                                    <br> Account Number : {{env('ORG_ACCOUNT_NO')}} <br>
                                 </td>
                             </tr>
                         </tbody>

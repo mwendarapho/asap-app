@@ -12,8 +12,9 @@ $balance=0;
 <div class="container-fluid">
     <div class="row ">
         <div class="col-md-12 text-center">
-            <h1>Test Organization </h1>
-            <h2>P.o Box 000 </h2>
+            <h2>{{env('ORG_NAME')}} </h2>
+            <h3>{{env('ORG_ADDRESS')}} </h3>
+            <p>{{env('ORG_EMAIL').' | '.env('ORG_PHONE')}} </p>
             <h3>Receipt</h3>
             <p></p>
             <table class="table">

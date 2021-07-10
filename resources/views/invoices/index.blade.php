@@ -1,4 +1,4 @@
-@section('title', 'Invoices |')
+@section('title', 'Invoices')
 @extends('layouts.app')
 @section('content')
 <div class="container py-3">

@@ -11,6 +11,7 @@ class PaymentController extends Controller
 {
 
     use MemberTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -27,12 +28,14 @@ class PaymentController extends Controller
 
     public function statement(Request $request)
     {
+//dd($request->member_id);
+        $from_date = $request->from_date;
+        $to_date = $request->to_date;
+        $member_id = $request->member_id;
 
-        $from_date= $request->from_date;
-        $to_date=$request->to_date;
+        // dd($balBF=$this->balanceBroughtForward('2021-06-01',29));
 
-
-        $balBF=$this->balanceBroughtForward($from_date,$request->member_id);
+        $balBF = $this->balanceBroughtForward($from_date, $member_id);
 
         $transactions = "select  docno, member_id,date,T5.fname,T5.lname,
                         sum(case when doctype = 'INV' then amount else 0 end) owed,
@@ -46,49 +49,62 @@ class PaymentController extends Controller
                         select T3.id as docno,T3.member_id, T3.pay_date as date,  T3.amount,'RCT' as doctype
                         from payments T3
                         ) T4
-                        join members T5 on T4.member_id=T5.id
-                        WHERE T4.member_id=$request->member_id
-                        and date >= '$from_date'
-                            and   date <= '$to_date'
+                        join members T5 on T4.member_id=T5.id";
+        if ($request->member_id == 000) {
 
-                        GROUP BY T4.docno";
+            $transaction1 = " WHERE date >= :from_date
+                            and   date <= :to_date GROUP BY T4.docno";
+
+            $transactions .= $transaction1;
+
+        } else {
+            $transaction1 = " WHERE T4.member_id=:member_id AND date >= :from_date
+                            and   date <= :to_date GROUP BY T4.docno";
+
+            $transactions .= $transaction1;
+        }
+
+        // DB::enableQueryLog();
+        if ($member_id == 000) {
+            $transactions = DB::select(DB::raw($transactions), ['to_date' => $to_date, 'from_date' => $from_date]);
+
+        } else {
+            $transactions = DB::select(DB::raw($transactions), ['to_date' => $to_date, 'from_date' => $from_date, 'member_id' => $member_id]);
+
+        }
+        // $log = DB::getQueryLog();
+        //dump($log);
 
 
-        $transactions = DB::select(DB::raw($transactions));
-
-
-        return view('statements.index', compact(['transactions','balBF']));
+        return view('statements.index', compact(['transactions', 'balBF']));
     }
 
     public function statement1(Request $request)
     {
-        $data=$request->all();
+        $data = $request->all();
 
-       //dd($request->all());
-       //$balanceBF=$this->balanceBroughtForward($data['from_date'],$data['member_id']);
+        //dd($request->all());
+        //$balanceBF=$this->balanceBroughtForward($data['from_date'],$data['member_id']);
 
         $transactions = DB::table('invoices as T1')
-        ->join('items as T2', 'T1.id', '=', 'T2.invoice_id')
-        //->join('members as T3', 'T1.member_id', '=', 'T3.id')
-        ->select('T1.id as docno', 'T2.amount', 'T1.member_id', 'T1.due_date as date')
-        ->groupby('T2.invoice_id')
-        //->sum('T2.amount');
-                        ->get();
-
-
-
+            ->join('items as T2', 'T1.id', '=', 'T2.invoice_id')
+            //->join('members as T3', 'T1.member_id', '=', 'T3.id')
+            ->select('T1.id as docno', 'T2.amount', 'T1.member_id', 'T1.due_date as date')
+            ->groupby('T2.invoice_id')
+            //->sum('T2.amount');
+            ->get();
 
 
         dd($transactions);
         $paymenttotal = DB::table('payments as T1')
             ->join('members as T2', 'T1.member_id', '=', 'T2.id')
-            ->select('T1.id as docno','T1.member_id','T1.amount','T1.pay_date')
+            ->select('T1.id as docno', 'T1.member_id', 'T1.amount', 'T1.pay_date')
             //->union($transactions)
             ->get();
         //print_r($paymenttotal);
-        return view('statements.index', compact(['transactions','balanceBF']));
+        return view('statements.index', compact(['transactions', 'balanceBF']));
         //$members = $this->currentMembers();
-       // return view('statements.member_statement',compact('members'));
+        // return view('statements.member_statement',compact('members'));
 
     }
 
@@ -108,7 +124,7 @@ class PaymentController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -121,7 +137,7 @@ class PaymentController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param \App\Models\Payment $payment
      * @return \Illuminate\Http\Response
      */
     public function show(Payment $payment)
@@ -134,7 +150,7 @@ class PaymentController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param \App\Models\Payment $payment
      * @return \Illuminate\Http\Response
      */
     public function edit(Payment $payment)
@@ -144,8 +160,8 @@ class PaymentController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Payment  $payment
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Payment $payment
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Payment $payment)
@@ -156,7 +172,7 @@ class PaymentController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Payment  $payment
+     * @param \App\Models\Payment $payment
      * @return \Illuminate\Http\Response
      */
     public function destroy(Payment $payment)
@@ -164,25 +180,27 @@ class PaymentController extends Controller
         //
     }
 
-    public function statement100(Request $request){
+    public function statement100(Request $request)
+    {
 
 
-        $data=$request->all();
+        $data = $request->all();
 
         dd($data);
 
 
         // DB::enableQueryLog();
 
-       dd($this->balanceBroughtForward($data['from_date'],$data['member_id']));
-       //$log = DB::getQueryLog();
-       //dump($log);
+        dd($this->balanceBroughtForward($data['from_date'], $data['member_id']));
+        //$log = DB::getQueryLog();
+        //dump($log);
 
     }
 
-    public function statementFilter(){
+    public function statementFilter()
+    {
         $members = $this->allMembers();
-        return view('statements.member_statement',compact('members'));
+        return view('statements.member_statement', compact('members'));
 
     }
 }

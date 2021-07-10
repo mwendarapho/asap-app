@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Create Payment')
+@section('title','Payment')
 
 @section('content')
 <div class="container">
@@ -64,7 +64,7 @@
                         <div class="row">
                             <table class="table table-bordered">
                                 <thead class=" table-dark">
-                                    
+
                                     <th>Mode</th>
                                     <th>Reference / Remarks</th>
                                     <th>Amount</th>
@@ -73,7 +73,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                      
+
                                         <td width="20%">
                                             <select class="form-control @error('paymode_id') is-invalid @enderror" name="paymode_id" id="paymode_id" required>
                                                 <option value="" selected>{{ 'Choose Mode' }}</option>
@@ -157,7 +157,7 @@
             }
 
 
-            // $('#amount').val(amount.toFixed(2));            
+            // $('#amount').val(amount.toFixed(2));
 
             var total = qty * amount;
             //get total to 2dp

@@ -10,7 +10,7 @@
     <table class="table table-hover">
         <thead>
         <tr>
-
+            <th scope="col">#</th>
             <th scope="col">First</th>
             <th scope="col">Mobile</th>
             <th scope="col">Email</th>
@@ -24,6 +24,7 @@
         <tbody>
         @foreach($members as $member)
         <tr>
+            <td>{{ $member->id}}</td>
             <td>{{ $member->fname.' '.$member->lname }}</td>
             <td>{{ $member->mobile }}</td>
             <td>{{ $member->email }}</td>

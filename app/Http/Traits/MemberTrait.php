@@ -6,11 +6,8 @@ namespace App\Http\Traits;
 use Illuminate\Support\Facades\DB;
 
 
-
-
 trait MemberTrait
 {
-
 
 
     public function currentMembers()
@@ -24,6 +21,7 @@ trait MemberTrait
 
         return $data;
     }
+
     public function allMembers()
     {
 
@@ -49,31 +47,46 @@ trait MemberTrait
     }
 
 
-    public function balanceBroughtForward($date,$member_id)
+    public function balanceBroughtForward($date, $member_id)
     {
+        //dd([$date,$member_id]);
+
         //DB::enableQueryLog();
 
-        $invoicetotal = DB::table('invoices as T1')
-            ->join('items as T2', 'T1.id', '=', 'T2.invoice_id')
-            ->join('members as T3', 'T1.member_id', '=', 'T3.id')
-            ->select(DB::raw('sum(T2.qty * T2.amount) as amount'),'qty','T1.id as docno', 'T1.member_id', 'T1.due_date as date', 'T3.fname', 'T3.lname')
+        $invoicetotal = "select sum(T2.qty * T2.amount) as amount
+                        from `invoices` as `T1`
+                        inner join `items` as `T2` on `T1`.`id` = `T2`.`invoice_id`
+                        where T1.due_date < :date ";
 
-            ->where('T1.due_date', '<', $date)
-            ->where('T1.member_id', '=', $member_id)
-            ->get();
+        if ($member_id != 000) {
+            $transaction1 = "  and T1.member_id = :member_id";
+
+            $invoicetotal .= $transaction1;
+            $invoicetotal = DB::select(DB::raw($invoicetotal), ['date' => $date, 'member_id' => $member_id]);
+        } else {
+            $invoicetotal = DB::select(DB::raw($invoicetotal), ['date' => $date]);
+        }
 
 
-        $paymenttotal = DB::table('payments as T1')
-            ->join('members as T2', 'T1.member_id', '=', 'T2.id')
-            ->where('T1.pay_date', '<', $date)
-            ->where('T2.id', '=', $member_id)
-            ->sum('T1.amount');
+        $paymenttotal = "select sum(T1.amount) as amount
+                        from payments T1
+                            inner join members T2 on T1.member_id=T2.id
+                               where T1.pay_date < :date ";
 
-        //$log = DB::getQueryLog();
-        //dump($log);
+        if ($member_id != 000) {
+            $transaction1 = "  and T2.id = :member_id";
 
-       
-         return ["credit"=>$paymenttotal, "debit"=>($invoicetotal[0]->amount)? :0];
+            $paymenttotal .= $transaction1;
+            $paymenttotal = DB::select(DB::raw($paymenttotal), ['date' => $date, 'member_id' => $member_id]);
+        } else {
+            $paymenttotal = DB::select(DB::raw($paymenttotal), ['date' => $date]);
+        }
+
+
+        //  $log = DB::getQueryLog();
+        // dump($log);
+
+        return ["credit" => ($paymenttotal[0]->amount) ?: 0, "debit" => ($invoicetotal[0]->amount) ?: 0];
 
 
     }
