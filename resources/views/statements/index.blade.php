@@ -18,7 +18,8 @@
         <tbody>
         <tr class="text-black-50">
             <td>Date Range</td>
-            <td>{{$dateRange['from_date']}}</td>
+            <td class="text-right">{{$dateRange['from_date']}}</td>
+            <td class="text-center">To</td>
             <td>{{$dateRange['to_date']}}</td>
         </tr>
         </tbody>
