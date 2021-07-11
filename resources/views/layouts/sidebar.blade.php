@@ -11,26 +11,21 @@
                     Dashboard <span class="sr-only">(current)</span>
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('member.index') }}">
-                <span data-feather="users"></span>
-                    Members
-                </a>
-            </li>
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('invoice.index') }}">
                     <span data-feather="layers"></span>
                     Invoices
                 </a>
             </li>
-           
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('payment')}}">
                     <span data-feather="bar-chart-2"></span>
                     Payments
                 </a>
             </li>
-            
+
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('statement')}}">
                     <span data-feather="file-text"></span>
@@ -47,6 +42,12 @@
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.index') }}">
+                    <span data-feather="users"></span>
+                    Members
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="{{ route('member.current') }}">
                     <span data-feather="file-text"></span>
                     Current Members
@@ -58,8 +59,8 @@
                    Past Members
                 </a>
             </li>
-           
-            
+
+
         </ul>
     </div>
 </nav>

@@ -8,14 +8,27 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button>--}}
-
-    <a class="btn btn-success" href="statement">Statement</a>
+    <div class="col-md-12 text-center d-none d-print-block">
+        <h2>Test Oraganization </h2>
+        <h3>P.o Box 000 </h3>
+        <p>someone@test.org | +254 123456 </p>
+        <h3>Statement</h3>
+    </div>
+    <table class="table">
+        <tbody>
+        <tr class="text-black-50">
+            <td>Date Range</td>
+            <td>{{$dateRange['from_date']}}</td>
+            <td>{{$dateRange['to_date']}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1>Statement</h1>
+            <h1></h1>
         </div>
     </div>
     <div class="row">

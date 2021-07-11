@@ -20,6 +20,13 @@
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">--}}
     @stack('styles')
+    <style>
+        @media print {
+            .btn {
+                display: none;
+            }
+        }
+    </style>
 </head>
 
 <body>

@@ -33,6 +33,9 @@ class PaymentController extends Controller
         $to_date = $request->to_date;
         $member_id = $request->member_id;
 
+        $dateRange=['to_date'=>$to_date,'from_date'=>$from_date];
+
+
         // dd($balBF=$this->balanceBroughtForward('2021-06-01',29));
 
         $balBF = $this->balanceBroughtForward($from_date, $member_id);
@@ -76,7 +79,7 @@ class PaymentController extends Controller
         //dump($log);
 
 
-        return view('statements.index', compact(['transactions', 'balBF']));
+        return view('statements.index', compact(['transactions', 'balBF','dateRange']));
     }
 
     public function statement1(Request $request)
