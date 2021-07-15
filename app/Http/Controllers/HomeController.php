@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Traits\MemberTrait;
 
 class HomeController extends Controller
 {
+    use MemberTrait;
+
     /**
      * Create a new controller instance.
      *
@@ -23,7 +27,9 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
-        return view('home');
+       $data= $this->balanceBroughtForward(Carbon::tomorrow(),00);
+      // dd($data);
+
+        return view('home',compact('data'));
     }
 }
