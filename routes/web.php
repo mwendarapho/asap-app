@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\CreditnoteController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,13 @@ Route::resource('payment',PaymentController::class);
 Route::post('statement100',[PaymentController::class,'statement100'])->name('statement100');
 Route::post('statement',[PaymentController::class,'statement'])->name('statement');
 Route::get('statement',[PaymentController::class,'statementFilter'])->name('statementFilter');
-
+Route::resource('credit',CreditnoteController::class);
 
 
 Route::get('/', function () {
 
-  return view('home');
+  //return view('home');
+    return redirect()->route('home');
 });
 //Route::get('receipt', function () {
   //  return view('receipts.index');

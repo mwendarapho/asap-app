@@ -15,7 +15,7 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
+    @livewireStyles
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     {{--<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">--}}
@@ -127,6 +127,7 @@
     @yield('scripts')
 
 @include('layouts.facebook_messager')
+    @livewireScripts
 </body>
 
 </html>
