@@ -76,7 +76,7 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //
+        return view('members.edit',compact('member'));
     }
 
     /**
@@ -86,9 +86,11 @@ class MemberController extends Controller
      * @param  \App\Models\Member  $member
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Member $member)
+    public function update(MemberRequest $request, Member $member)
     {
-        //
+       // dd($request->validated());
+        $member->update($request->validated());
+        return redirect()->route('member.edit',compact('member'))->with(['message'=>'updated successfully']);
     }
 
     /**

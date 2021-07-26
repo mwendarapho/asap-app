@@ -31,7 +31,7 @@ class MemberRequest extends FormRequest
             'email'=> 'nullable | email',
             'dob'=> 'nullable | date | before:-18 years',
             'spouse_name'=>'nullable ',
-            'spouse_mobile'=>'nullable | numeric|unique:members',
+            'spouse_mobile'=>'nullable | numeric',
             'joined_on'=> 'nullable | date | before_or_equal:today',
             'left_on'=> 'nullable | date | after_or_equal:today',
 

@@ -1,37 +1,52 @@
 @extends('layouts.app')
 @section('title','Members')
 @section('content')
-    <div class="container py-3">
-        <a href="{{ route('member.create') }}" class="btn btn-sm btn-success">Create Member</a>
+
+
+
+    <div class="container py-3 text-center">
+        <div class="d-none d-print-block">
+            <h2>{{env('ORG_NAME')}} </h2>
+            <h3>{{env('ORG_ADDRESS')}} </h3>
+            <p>{{env('ORG_EMAIL').' | '.env('ORG_PHONE')}} </p>
+        </div>
+        <h2>
+            {{ $member->fname.' '.$member->lname }}
+        </h2>
 
     </div>
 
-    <table class="table table-hover">
-        <thead>
-        <tr>
-
-            <th scope="col">First</th>
-            <th scope="col">Mobile</th>
-            <th scope="col">Email</th>
-            {{--<th scope="col">Address</th>--}}
-            <th scope="col">DOB</th>
-            <th scope="col">Spouse Name</th>
-            <th scope="col">Spouse Mobile</th>
-            <th>Status</th>
-        </tr>
-        </thead>
+    <table class="table table-hover table-striped table-bordered">
         <tbody>
 
-            <tr>
-                <td>{{ $member->fname.' '.$member->lname }}</td>
-                <td>{{ $member->mobile }}</td>
-                <td>{{ $member->email }}</td>
-                {{-- <td>{{ $member->address }}</td>--}}
-                <td>{{ $member->dob }}</td>
-                <td>{{ $member->spouse_name }}</td>
-                <td>{{ $member->spouse_mobile }}</td>
-                <td>{{ ($member->status ? 'active' : 'inactive') }}</td>
-            </tr>
+        <tr>
+            <td class="text-right" width="50%">Phone</td>
+            <td class="text-left">{{ $member->mobile }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Email</td>
+            <td class="text-left">{{ $member->email }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Address</td>
+            <td class="text-left">{{ $member->address }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">DOB</td>
+            <td class="text-left">{{ $member->dob }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Spouse Name</td>
+            <td class="text-left">{{ $member->spouse_name }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Spouse Mobile</td>
+            <td class="text-left">{{ $member->spouse_mobile }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Status</td>
+            <td class="text-left">{{ ($member->status ? 'active' : 'inactive') }}</td>
+        </tr>
 
         </tbody>
     </table>
