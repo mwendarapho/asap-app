@@ -76,6 +76,7 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
+        //dd($member);
         return view('members.edit',compact('member'));
     }
 
@@ -88,9 +89,13 @@ class MemberController extends Controller
      */
     public function update(MemberRequest $request, Member $member)
     {
-       // dd($request->validated());
-        $member->update($request->validated());
-        return redirect()->route('member.edit',compact('member'))->with(['message'=>'updated successfully']);
+        //dd($request->left_on);
+        $data=$request->validated();
+        ($request->left_on!='')? $data['status']=false: $data['status']=true;
+
+        //dd($data);
+        $member->update($data);
+        return redirect()->route('member.show',compact('member'))->with(['message'=>'updated successfully']);
     }
 
     /**
@@ -101,6 +106,7 @@ class MemberController extends Controller
      */
     public function destroy(Member $member)
     {
-        //
+        $member->delete();
+        redirect()->route('member.index')->with(['message'=>'member deleted successfully']);
     }
 }

@@ -25,7 +25,7 @@ class PaymentFactory extends Factory
 
         return [
             'amount'=>$this->faker->randomNumber(4),
-            'pay_date'=>$this->faker->date('Y-m-d','now'),
+            'pay_date'=>$this->faker->date('Y-m-d','now','2016-01-01'),
             'member_id'=>random_int(1,10),
             'ref'=>$this->faker->catchPhrase(),
             'paymode_id'=>random_int(1,5),

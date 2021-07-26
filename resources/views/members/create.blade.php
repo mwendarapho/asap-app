@@ -144,10 +144,10 @@
                                 </div>
 
                                 <div class="form-group row">
-                                    <label for="left_on" class="col-md-4 col-form-label text-md-right">{{ __('Left On') }}</label>
+                                    {{--<label for="left_on" class="col-md-4 col-form-label text-md-right">{{ __('Left On') }}</label >--}}
 
                                     <div class="col-md-6">
-                                        <input id="left_on" type="date" class="form-control @error('left_on') is-invalid @enderror" name="left_on" value="{{ old('left_on') }}"  autocomplete="left_on">
+                                        <input id="left_on" type="date" class="form-control @error('left_on') is-invalid @enderror" name="left_on" value="{{ old('left_on') }}"  autocomplete="left_on" hidden>
 
                                         @error('left_on')
                                         <span class="invalid-feedback" role="alert">

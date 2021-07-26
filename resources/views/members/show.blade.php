@@ -12,6 +12,7 @@
         </div>
         <h2>
             {{ $member->fname.' '.$member->lname }}
+            <br><a href="{{ route('member.edit',$member->id) }}" class="btn btn-sm btn-success text-left">Edit Member</a>
         </h2>
 
     </div>
@@ -42,6 +43,14 @@
         <tr>
             <td class="text-right" width="50%">Spouse Mobile</td>
             <td class="text-left">{{ $member->spouse_mobile }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Joined On</td>
+            <td class="text-left">{{ $member->joined_on }}</td>
+        </tr>
+        <tr>
+            <td class="text-right" width="50%">Left On</td>
+            <td class="text-left">{{ $member->left_on }}</td>
         </tr>
         <tr>
             <td class="text-right" width="50%">Status</td>

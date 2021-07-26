@@ -19,7 +19,8 @@ class Member extends Model
         'spouse_name',
         'spouse_mobile',
         'joined_on',
-        'left_on'
+        'left_on',
+        'status',
 
     ];
 
