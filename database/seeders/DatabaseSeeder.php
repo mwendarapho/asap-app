@@ -19,7 +19,9 @@ class DatabaseSeeder extends Seeder
         $this->call(TaxSeeder::class);
         $this->call(PaymodeSeeder::class);
         $this->call(PaymentSeeder::class);
-        
-        
+        //$this->call(InvoiceSeeder::class);
+       // $this->call(ItemSeeder::class);
+
+
     }
 }

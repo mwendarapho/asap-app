@@ -32,4 +32,7 @@ class Member extends Model
     public function payment(){
         return $this->hasMany(Payment::class);
     }
+    public function creditnote(){
+        return $this->hasMany(Creditnote::class);
+    }
 }

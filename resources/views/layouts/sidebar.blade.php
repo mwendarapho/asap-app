@@ -25,6 +25,13 @@
                     Payments
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ url('credit')}}">
+                    <span data-feather="bar-chart-2"></span>
+                    Credit Note
+                </a>
+            </li>
+
 
             <li class="nav-item">
                 <a class="nav-link" href="{{ url('statement')}}">

@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@section('title','Members')
 @section('content')
     <div class="container py-3">
         <a href="{{ route('member.create') }}" class="btn btn-sm btn-success">Create Member</a>

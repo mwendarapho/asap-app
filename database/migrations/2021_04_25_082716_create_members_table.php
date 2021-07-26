@@ -19,11 +19,11 @@ class CreateMembersTable extends Migration
             $table->string('lname');
             $table->string('email');
             $table->string('mobile');
-            $table->string('address');
-            $table->date('dob');
+            $table->string('address')->nullable();
+            $table->date('dob')->nullable();
             $table->string('spouse_name')->nullable();
             $table->string('spouse_mobile')->nullable();
-            $table->date('joined_on');
+            $table->date('joined_on')->nullable();
             $table->date('left_on')->nullable();
             $table->boolean('status')->default(true);
             $table->timestamps();

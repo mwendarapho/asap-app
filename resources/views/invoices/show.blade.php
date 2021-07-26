@@ -13,8 +13,8 @@
 
 <div class="container mt-5 mb-3">
     <div class="row d-flex justify-content-center">
-        <div class="col-md-8">
-            <div class="pageNo">
+        <div class="col-md-12">
+            <div class="pageNo d-print-none">
                 <a href="{{ ($invoice->id>1)? $invoice->id-1:$invoice->id }}"><span data-feather="arrow-left-circle" class="small text-white"></span></a>
                 <span class="text-white">{{$invoice->id}}</span>
                 <a href="{{ ($invoice->id<$totalinvoice) ? $invoice->id+1:$invoice->id }}"><span data-feather="arrow-right-circle" class="small text-white"></span></a>

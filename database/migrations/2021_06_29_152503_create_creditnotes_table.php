@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePaymodesTable extends Migration
+class CreateCreditnotesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class CreatePaymodesTable extends Migration
      */
     public function up()
     {
-        Schema::create('paymodes', function (Blueprint $table) {
+        Schema::create('creditnotes', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
+            $table->foreignId('member_id')->constrained();
+            $table->foreignId('invoice_id')->constrained();
+            $table->decimal('amount',8,2);
+            $table->date('credit_date');
+            $table->string('credit_ref')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +31,6 @@ class CreatePaymodesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('paymodes');
+        Schema::dropIfExists('creditnotes');
     }
 }

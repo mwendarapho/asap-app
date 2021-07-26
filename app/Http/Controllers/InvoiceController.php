@@ -108,6 +108,7 @@ class InvoiceController extends Controller
             ->get();
 
 
+
         return view('invoices.show', compact(['invoice', 'items', 'totalinvoice']));
         //$log = DB::getQueryLog();
         //dump($log);

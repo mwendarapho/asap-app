@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use App\Models\Payment;
+use App\Models\Paymode;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 class PaymentFactory extends Factory
@@ -21,13 +22,14 @@ class PaymentFactory extends Factory
      */
     public function definition()
     {
-        
+
         return [
             'amount'=>$this->faker->randomNumber(4),
             'pay_date'=>$this->faker->date('Y-m-d','now'),
             'member_id'=>random_int(1,10),
             'ref'=>$this->faker->catchPhrase(),
-            'paymode_id'=>random_int(1,3),
+            'paymode_id'=>random_int(1,5),
+
 
         ];
     }

@@ -22,7 +22,11 @@ class ItemFactory extends Factory
     public function definition()
     {
         return [
-            //
+            'member_id' => random_int(1,30),
+            'qty'=> random_int(1,5),
+             'amount' => $this->faker->randomFloat(2, 2),
+             'description' => $this->faker->catchPhrase,
+            'invoice_no' => $this->faker->biasedNumberBetween(1,100),
         ];
     }
 }

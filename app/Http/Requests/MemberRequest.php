@@ -29,10 +29,10 @@ class MemberRequest extends FormRequest
             'mobile'=> 'required| numeric| unique:members',
             'address'=> 'nullable',
             'email'=> 'required | email| unique:members',
-            'dob'=> 'required | date | before:-18 years',
+            'dob'=> 'nullable | date | before:-18 years',
             'spouse_name'=>'nullable ',
             'spouse_mobile'=>'nullable | numeric|unique:members',
-            'joined_on'=> 'required | date | before_or_equal:today',
+            'joined_on'=> 'nullable | date | before_or_equal:today',
             'left_on'=> 'nullable | date | after_or_equal:today',
 
         ];

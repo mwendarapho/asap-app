@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Payments')
+@section('title','Credit')
 
 @section('content')
 @php
@@ -12,8 +12,8 @@ $balance=0;
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
-            <h1>Payments</h1>
-            <a href="{{ route('payment.create') }}" class="btn btn-sm btn-success">Receive payment</a>
+            <h1>Credit Note</h1>
+            <a href="{{ route('credit.create') }}" class="btn btn-sm btn-success">Credit Invoice</a>
         </div>
     </div>
     <div class="row">
@@ -22,29 +22,29 @@ $balance=0;
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
-                        <th scope="col">RCT No</th>
+                        <th scope="col">CRD No</th>
                         <th scope="col">Member</th>
-                        <th scope="col">Mode</th>
+                        <th scope="col">Invoice No</th>
                         <th scope="col">Reference</th>
                         <th scope="col">Amount[KES]</th>
-                        <th scope="col">R-Balacnce[KES]</th>
+
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($payments as $payment)
+                    @foreach($credits as $credit)
 
                     <tr>
-                        <td>{{$payment->pay_date}}</td>
+                        <td>{{$credit->credit_date}}</td>
                         <td>
-                            <a href="{{'payment/'.$payment->id}}">
+                            <a href="{{'credit/'.$credit->id}}">
                                 <span data-feather="arrow-right-circle" class="small text-success d-print-none"></span></a>
-                            RCT{{ $payment->id}}
+                            CRD {{ $credit->id}}
                         </td>
-                        <td>{{$payment->member->lname.', '.$payment->member->fname}}</td>
-                        <td>{{ $payment->paymode->name }}</td>
-                        <td>{{ $payment->ref }}</td>
-                        <td>{{ number_format($payment->amount, 2) }}</td>
-                        <td>{{ number_format($balance+=$payment->amount,2) }}</td>
+                        <td>{{$credit->member->fname.' '.$credit->member->lname}}</td>
+                        <td>{{ $credit->invoice_id }}</td>
+                        <td>{{ $credit->credit_ref }}</td>
+                        <td>{{ number_format($credit->amount, 2) }}</td>
+
                     </tr>
                     @endforeach
                 <tfoot>
@@ -62,7 +62,7 @@ $balance=0;
 
             </table>
             <div class="container-fluid align-content-lg-center">
-                {{ $payments->links() }}
+                {{ $credits->links() }}
             </div>
         </div>
     </div>

@@ -2,18 +2,17 @@
 
 namespace Database\Factories;
 
-use App\Models\Paymode;
+use App\Models\Creditnote;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-
-class PaymodeFactory extends Factory
+class CreditnoteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = Paymode::class;
+    protected $model = Creditnote::class;
 
     /**
      * Define the model's default state.
@@ -22,9 +21,8 @@ class PaymodeFactory extends Factory
      */
     public function definition()
     {
-        return ['name'=>'name'];
+        return [
+            //
+        ];
     }
-
-
-
 }

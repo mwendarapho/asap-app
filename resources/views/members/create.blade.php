@@ -81,7 +81,7 @@
                                     <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address">
+                                        <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}"  autocomplete="address">
 
                                         @error('address')
                                         <span class="invalid-feedback" role="alert">
@@ -94,7 +94,7 @@
                                     <label for="dob" class="col-md-4 col-form-label text-md-right">{{ __('DOB') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}" required autocomplete="dob">
+                                        <input id="dob" type="date" class="form-control @error('dob') is-invalid @enderror" name="dob" value="{{ old('dob') }}"  autocomplete="dob">
 
                                         @error('dob')
                                         <span class="invalid-feedback" role="alert">
@@ -133,7 +133,7 @@
                                     <label for="joined_on" class="col-md-4 col-form-label text-md-right">{{ __('Joined On') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="joined_on" type="date" class="form-control @error('joined_on') is-invalid @enderror" name="joined_on" value="{{ old('joined_on') }}" required autocomplete="joined_on">
+                                        <input id="joined_on" type="date" class="form-control @error('joined_on') is-invalid @enderror" name="joined_on" value="{{ old('joined_on') }}"  autocomplete="joined_on">
 
                                         @error('joined_on')
                                         <span class="invalid-feedback" role="alert">
