@@ -26,9 +26,9 @@ class MemberRequest extends FormRequest
         return [
             'fname'=> 'required',
             'lname'=> 'required',
-            'mobile'=> 'required| numeric| unique:members',
+            'mobile'=> 'required| numeric',
             'address'=> 'nullable',
-            'email'=> 'required | email| unique:members',
+            'email'=> 'nullable | email',
             'dob'=> 'nullable | date | before:-18 years',
             'spouse_name'=>'nullable ',
             'spouse_mobile'=>'nullable | numeric|unique:members',
