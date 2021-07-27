@@ -25,8 +25,8 @@ class MemberRequest extends FormRequest
     {
         return [
             'fname'=> 'required',
-            'lname'=> 'required',
-            'mobile'=> 'required| numeric',
+            'lname'=> 'nullable',
+            'mobile'=> 'nullable| numeric',
             'address'=> 'nullable',
             'email'=> 'nullable | email',
             'dob'=> 'nullable | date | before:-18 years',
