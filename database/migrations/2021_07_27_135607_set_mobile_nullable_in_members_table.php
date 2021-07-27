@@ -14,7 +14,7 @@ class SetMobileNullableInMembersTable extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->string('mobile')->nullable();
+            $table->string('mobile')->nullable()->change();
         });
     }
 
