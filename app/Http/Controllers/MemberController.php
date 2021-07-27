@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\MembersImport;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
@@ -108,5 +110,16 @@ class MemberController extends Controller
     {
         $member->delete();
         redirect()->route('member.index')->with(['message'=>'member deleted successfully']);
+    }
+
+    public function fileImportExport()
+    {
+        return view('members.file-import');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new MembersImport, $request->file('file')->store('temp'));
+        return back()->with(['message'=>'Imported successfully']);
     }
 }

@@ -41,6 +41,11 @@ Route::get('/', function () {
 //Route::get('receipt', function () {
   //  return view('receipts.index');
 //});
+
+    Route::get('file-import-export', [MemberController::class, 'fileImportExport']);
+    Route::post('file-import', [MemberController::class, 'fileImport'])->name('file-import');
+    Route::get('file-export', [UserController::class, 'fileExport'])->name('file-export');
+
 });
 
 
