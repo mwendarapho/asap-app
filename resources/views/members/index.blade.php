@@ -14,14 +14,9 @@
             <th scope="col">First</th>
             <th scope="col">Mobile</th>
             <th scope="col">Email</th>
-            {{--<th scope="col">Address</th>
-            <th scope="col">DOB</th>
-            <th scope="col">Spouse Name</th>
-            <th scope="col">Spouse Mobile</th>
-            <th>Status</th>
-            <th class="d-print-none">Show</th>--}}
-            <th class="d-print-none">Edit</th>
-            <th class="d-print-none">Del</th>
+
+            <th rowspan="2" class="d-print-none">Menu</th>
+
         </tr>
         </thead>
         <tbody>
@@ -31,14 +26,12 @@
             <td>{{ $member->fname.' '.$member->lname }}</td>
             <td>{{ $member->mobile }}</td>
             <td>{{ $member->email }}</td>
-           {{-- <td>{{ $member->address }}</td>
-            <td>{{ $member->dob }}</td>
-            <td>{{ $member->spouse_name }}</td>
-            <td>{{ $member->spouse_mobile }}</td>
-            <td>{{ ($member->status ? 'active' : 'inactive') }}</td>
-            <td><a href="{{ 'member/'.$member->id }}">Show</a> </td>--}}
-            <td><a href="{{ 'member/'.$member->id.'/edit' }}">Edit</a> </td>
-            <td><a href="{{ 'member/'.$member->id }}">Delete</a> </td>
+
+            <td>
+                <a  class="btn btn-outline-primary btn-sm" href="{{ 'member/'.$member->id.'/edit' }}">Edit</a>
+                <a class="btn btn-outline-danger btn-sm"  id="delete-member" href="{{ 'member/'.$member->id }}">Delete</a>
+            </td>
+
         </tr>
         @endforeach
         </tbody>
@@ -46,5 +39,39 @@
     <div class="container-fluid align-content-lg-center">
         {{ $members->links() }}
     </div>
+
+@endsection
+@section('scripts')
+
+    <script>
+        $(document).on('click', '#delete-member', function(e) {
+            e.preventDefault();
+
+            if (confirm('Delete Member, Are you sure?')) {
+
+                var href = $(this).attr('href');
+                $.ajax({
+                    method: "DELETE",
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+
+                    url: href,
+                    //dataType: "json",
+                    success: function() {
+
+                        //$('#invoices').DataTable().ajax.reload();
+                        location.reload();
+
+
+                        console.log("Successful Del");
+
+                    }
+
+                })
+            }
+        });
+
+    </script>
 
 @endsection

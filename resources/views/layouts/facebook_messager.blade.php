@@ -1,3 +1,4 @@
+{{--
 <!-- Messenger Chat Plugin Code -->
 <div id="fb-root"></div>
 
@@ -25,3 +26,4 @@
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
 </script>
+--}}
