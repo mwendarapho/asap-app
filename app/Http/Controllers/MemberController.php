@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Imports\MembersImport;
+use App\Models\Category;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
@@ -42,7 +43,9 @@ class MemberController extends Controller
      */
     public function create()
     {
-        return view('members.create');
+        $categories=DB::table('categories')->select('id','name')->get();
+        //dd($categories);
+        return view('members.create',compact('categories'));
     }
 
     /**
@@ -54,8 +57,8 @@ class MemberController extends Controller
     public function store(MemberRequest  $request)
     {
         Member::create($request->validated());
-        //return redirect('member')->with('message','Member added successfully');
-        return view('members.create')->with('message','Member added successfully');
+        return redirect()->route('member.create')->with('message','Member added successfully');
+        //return view('members.create')->with('message','Member added successfully');
 
     }
 

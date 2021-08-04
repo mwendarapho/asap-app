@@ -54,7 +54,7 @@
                                     <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email">
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -68,7 +68,7 @@
                                     <label for="mobile" class="col-md-4 col-form-label text-md-right">{{ __('Mobile') }}</label>
 
                                     <div class="col-md-6">
-                                        <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}" required autocomplete="mobile">
+                                        <input id="mobile" type="text" class="form-control @error('mobile') is-invalid @enderror" name="mobile" value="{{ old('mobile') }}"  autocomplete="mobile">
 
                                         @error('mobile')
                                         <span class="invalid-feedback" role="alert">
@@ -150,6 +150,23 @@
                                         <input id="left_on" type="date" class="form-control @error('left_on') is-invalid @enderror" name="left_on" value="{{ old('left_on') }}"  autocomplete="left_on" hidden>
 
                                         @error('left_on')
+                                        <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="form-group row">
+                                    <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
+
+                                    <div class="col-md-6 form-check form-check-inline">
+                                        @foreach($categories as $category)
+                                        <input type="radio" class="form-check-input" name="category_id" value="{{ $category->id}}">
+                                            <label class="form-check-label" for="category_id"> {{ $category->name }}</label>
+                                        @endforeach
+
+                                        @error('category_id')
                                         <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

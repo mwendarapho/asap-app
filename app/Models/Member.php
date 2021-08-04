@@ -21,6 +21,7 @@ class Member extends Model
         'joined_on',
         'left_on',
         'status',
+        'category_id'
 
     ];
 

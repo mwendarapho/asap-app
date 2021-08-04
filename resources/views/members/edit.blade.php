@@ -47,7 +47,7 @@
                                 <div class="col-md-6">
                                     <input id="lname" type="text"
                                            class="form-control @error('lname') is-invalid @enderror" name="lname"
-                                           value="{{ $member->lname }}" required autocomplete="lname" autofocus>
+                                           value="{{ $member->lname }}"  autocomplete="lname" autofocus>
 
                                     @error('lname')
                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +64,7 @@
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                            class="form-control @error('email') is-invalid @enderror" name="email"
-                                           value="{{ $member->email }}" required autocomplete="email">
+                                           value="{{ $member->email }}"  autocomplete="email">
 
                                     @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -81,7 +81,7 @@
                                 <div class="col-md-6">
                                     <input id="mobile" type="text"
                                            class="form-control @error('mobile') is-invalid @enderror" name="mobile"
-                                           value="{{ $member->mobile }}" required autocomplete="mobile">
+                                           value="{{ $member->mobile }}"  autocomplete="mobile">
 
                                     @error('mobile')
                                     <span class="invalid-feedback" role="alert">
