@@ -60,7 +60,7 @@ class PaymentController extends Controller
         if ($request->member_id == 000) {
 
             $transaction1 = " WHERE date >= :from_date
-                            and   date <= :to_date GROUP BY T4.docno order by T4.date";
+                            and   date <= :to_date GROUP BY T4.docno,T4.member_id,T4.date order by T4.date";
 
             $transactions .= $transaction1;
 

@@ -68,13 +68,18 @@ trait MemberTrait
         }
 
 
-        $paymenttotal = "select sum(T1.amount) as amount
+        $paymenttotal = "select sum(T4.amount) as amount
+                        from (
+                        select T1.amount, T1.pay_date as doc_date,member_id
                         from payments T1
-                            inner join members T2 on T1.member_id=T2.id
-                               where T1.pay_date < :date ";
+                        union all
+                        select T3.amount, T3.credit_date as doc_date,member_id
+                        from creditnotes T3
+                        ) T4
+                        where doc_date< :date";
 
         if ($member_id != 000) {
-            $transaction1 = "  and T2.id = :member_id";
+            $transaction1 = "  and member_id = :member_id";
 
             $paymenttotal .= $transaction1;
             $paymenttotal = DB::select(DB::raw($paymenttotal), ['date' => $date, 'member_id' => $member_id]);
