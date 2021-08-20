@@ -84,7 +84,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td width="40%">
+                                        <td>
                                             <input id="desc" type="text" class="form-control @error('desc') is-invalid @enderror" name="desc" value="{{ old('desc') }}" required autocomplete="description">
 
                                             @error('desc')
@@ -94,7 +94,7 @@
                                             @enderror
 
                                         </td>
-                                        <td width="10%">
+                                        <td>
                                             <input id="qty" type="number" min="1" class="form-control @error('qty') is-invalid @enderror" name="qty" value="{{ old('qty') }}" required autocomplete="qty">
 
                                             @error('qty')
@@ -103,7 +103,7 @@
                                             </span>
                                             @enderror
                                         </td>
-                                        <td width="16%">
+                                        <td>
                                             <input id="amount" type="text" class="form-control @error('amount') is-invalid @enderror" name="amount" value="{{ old('amount') }}" required autocomplete="amount">
 
                                             @error('amount')
@@ -112,8 +112,8 @@
                                             </span>
                                             @enderror
                                         </td>
-                                        <td width="17%"><input id="total" type="text" class="form-control" value="" disabled></td>
-                                        <td width="17%">
+                                        <td><input id="total" type="text" class="form-control" value="" disabled></td>
+                                        <td>
                                             <btn id="delete" class="btn btn-danger btn-sm"><i data-feather="x"></i>Del</btn>
                                             <btn id="add" class="btn btn-success btn-sm"><i data-feather="plus"></i>Add</btn>
                                         </td>
@@ -171,7 +171,7 @@
             }
 
 
-            // $('#amount').val(amount.toFixed(2));            
+            // $('#amount').val(amount.toFixed(2));
 
             var total = qty * amount;
             //get total to 2dp

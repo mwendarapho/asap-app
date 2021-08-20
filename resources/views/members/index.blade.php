@@ -1,22 +1,28 @@
 @extends('layouts.app')
 @section('title','Members')
+
 @section('content')
     <div class="container py-3">
     <h1>Members</h1>
         <a href="{{ route('member.create') }}" class="btn btn-sm btn-success">Create Member</a>
-
     </div>
 
-    <table class="table table-hover">
+@section('styles')
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.7/css/jquery.dataTables.min.css">
+
+@endsection
+
+
+    <table class="table table-hover" id="memebersTable">
         <thead>
         <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Mobile</th>
-            <th scope="col">Email</th>
-
-            <th rowspan="2" class="d-print-none">Menu</th>
-
+            <th>#</th>
+            <th>First</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>status</th>
+            <th>Category</th>
+            <th class="d-print-none">Menu</th>
         </tr>
         </thead>
         <tbody>
@@ -26,6 +32,8 @@
             <td>{{ $member->fname.' '.$member->lname }}</td>
             <td>{{ $member->mobile }}</td>
             <td>{{ $member->email }}</td>
+            <td>{{ ($member->status? 'active' : 'inactive') }}</td>
+            <td>{{ $member->category->name }}</td>
 
             <td>
                 <a  class="btn btn-outline-primary btn-sm" href="{{ 'member/'.$member->id.'/edit' }}">Edit</a>
@@ -35,6 +43,17 @@
         </tr>
         @endforeach
         </tbody>
+        <tfoot>
+        <tr>
+            <th>#</th>
+            <th>First</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>status</th>
+            <th>Category</th>
+            <th class="d-print-none">Menu</th>
+        </tr>
+        </tfoot>
     </table>
     <div class="container-fluid align-content-lg-center">
         {{ $members->links() }}
@@ -43,7 +62,8 @@
 @endsection
 @section('scripts')
 
-    <script>
+    <script type="text/javascript">
+
         $(document).on('click', '#delete-member', function(e) {
             e.preventDefault();
 

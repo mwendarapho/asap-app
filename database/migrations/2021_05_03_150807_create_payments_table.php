@@ -17,7 +17,7 @@ class CreatePaymentsTable extends Migration
             $table->id();
             $table->date('pay_date');
             $table->decimal('amount',8,2);
-            $table->foreignId('member_id')->constrained();
+            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
             $table->foreignId('paymode_id')->constrained();
             $table->string('ref')->nullable();
             $table->timestamps();

@@ -16,12 +16,12 @@ class CreateInvoicesTable extends Migration
     {
         Schema::create('invoices', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('member_id')->constrained();
+            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
             $table->date('invoice_date')->default(now());
             $table->date('due_date')->default(now());
             $table->timestamps();
         });
-       
+
     }
 
     /**

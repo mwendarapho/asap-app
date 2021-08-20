@@ -15,11 +15,11 @@ class CreateCreditnotesTable extends Migration
     {
         Schema::create('creditnotes', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('member_id')->constrained();
-            $table->foreignId('invoice_id')->constrained();
+            $table->foreignId('member_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('invoice_id')->constrained()->cascadeOnDelete();
             $table->decimal('amount',8,2);
             $table->date('credit_date');
-            $table->string('credit_ref')->unique();
+            $table->string('credit_ref');
             $table->timestamps();
         });
     }

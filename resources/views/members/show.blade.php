@@ -53,6 +53,10 @@
             <td class="text-left">{{ $member->left_on }}</td>
         </tr>
         <tr>
+            <td class="text-right" width="50%">Category</td>
+            <td class="text-left">{{ $member->category_id }}</td>
+        </tr>
+        <tr>
             <td class="text-right" width="50%">Status</td>
             <td class="text-left">{{ ($member->status ? 'active' : 'inactive') }}</td>
         </tr>

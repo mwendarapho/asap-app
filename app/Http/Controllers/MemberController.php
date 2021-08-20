@@ -20,18 +20,17 @@ class MemberController extends Controller
      */
     public function index(){
 
-       $members= Member::paginate(10);
+       $members= Member::with('category')->paginate(10);
        return view('members.index',compact('members'));
     }
     public function current()
     {
-        $members= DB::table('members')->where('status','=',true)->paginate(10);
-
+        $members=Member::where('status','=',true)->paginate(10);
         return view('members.index',compact('members'));
     }
     public function past()
     {
-        $members= DB::table('members')->where('status','=',false)->paginate(10);
+        $members= Member::where('status','=',false)->paginate(10);
         return view('members.index',compact('members'));
     }
 

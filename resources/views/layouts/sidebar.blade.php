@@ -70,5 +70,6 @@
 
         </ul>
     </div>
+
 </nav>
 @endauth

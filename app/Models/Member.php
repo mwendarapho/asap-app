@@ -37,4 +37,8 @@ class Member extends Model
     public function creditnote(){
         return $this->hasMany(Creditnote::class);
     }
+
+    public function category(){
+        return $this->belongsTo(Category::class);
+    }
 }

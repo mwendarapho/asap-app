@@ -15,7 +15,7 @@ class CreateItemsTable extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id')->constrained();
+            $table->foreignId('invoice_id')->constrained()->cascadeOnDelete();
             $table->decimal('amount',8,2);
             $table->string('description');
             $table->integer('qty');

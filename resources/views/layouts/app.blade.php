@@ -18,8 +18,9 @@
     @livewireStyles
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    {{--<link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">--}}
-    @stack('styles')
+    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+
+    @yield('styles')
     <style>
         @media print {
             .btn {
@@ -117,7 +118,9 @@
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+
     <script>
         feather.replace()
     </script>
