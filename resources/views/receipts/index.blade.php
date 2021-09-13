@@ -40,7 +40,7 @@ $balance=0;
                                 <span data-feather="arrow-right-circle" class="small text-success d-print-none"></span></a>
                             RCT{{ $payment->id}}
                         </td>
-                        <td>{{$payment->member->lname.', '.$payment->member->fname}}</td>
+                        <td>{{ $payment->member->fname.' '.$payment->member->lname}}</td>
                         <td>{{ $payment->paymode->name }}</td>
                         <td>{{ $payment->ref }}</td>
                         <td>{{ number_format($payment->amount, 2) }}</td>

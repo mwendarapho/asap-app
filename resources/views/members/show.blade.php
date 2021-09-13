@@ -54,7 +54,7 @@
         </tr>
         <tr>
             <td class="text-right" width="50%">Category</td>
-            <td class="text-left">{{ $member->category_id }}</td>
+            <td class="text-left">{{ $member->category->name  }}</td>
         </tr>
         <tr>
             <td class="text-right" width="50%">Status</td>

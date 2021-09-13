@@ -23,6 +23,10 @@ Route::resource('member', MemberController::class)->middleware('auth');
 Route::middleware(['auth'])->group(function (){
 Route::get('member-current',[MemberController::class,'current'])->name('member.current');
 Route::get('member-past',[MemberController::class,'past'])->name('member.past');
+Route::get('sahayak',[MemberController::class,'sahayak'])->name('member.sahayak');
+Route::get('full-member',[MemberController::class,'fullMember'])->name('member.full');
+Route::get('paidup-member',[MemberController::class,'paidUp'])->name('member.paid');
+
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);
 Route::resource('payment',PaymentController::class);
@@ -44,7 +48,7 @@ Route::get('/', function () {
 
     Route::get('file-import-export', [MemberController::class, 'fileImportExport']);
     Route::post('file-import', [MemberController::class, 'fileImport'])->name('file-import');
-    Route::get('file-export', [UserController::class, 'fileExport'])->name('file-export');
+    //Route::get('file-export', [UserController::class, 'fileExport'])->name('file-export');
 
 });
 
@@ -53,3 +57,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('allmembers', [App\Http\Controllers\DatatablesController::class, 'getAllMembers'])->name('allmembers');
+Route::get('currentmembers', [App\Http\Controllers\DatatablesController::class, 'currentMembers'])->name('currentmembers');
+Route::get('pastMembers', [App\Http\Controllers\DatatablesController::class, 'pastMembers'])->name('pastmembers');
+Route::get('getsahayak', [App\Http\Controllers\DatatablesController::class, 'getSahayak'])->name('getsahayak');
+Route::get('getfullmember', [App\Http\Controllers\DatatablesController::class, 'getFullMember'])->name('getfullmember');
+
+Route::get('testmembers', [App\Http\Controllers\DatatablesController::class, 'index'])->name('testmembers');

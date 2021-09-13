@@ -1,4 +1,9 @@
+
 @auth()
+
+    @section('styles')
+        <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    @endsection
 
 <nav class="col-md-2 d-none d-md-block bg-light sidebar d-print-none">
 
@@ -39,6 +44,12 @@
                     Statement
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.index') }}">
+                    <span data-feather="users"></span>
+                    All Members
+                </a>
+            </li>
         </ul>
 
         <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
@@ -49,12 +60,6 @@
         </h6>
         <ul class="nav flex-column mb-2">
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('member.index') }}">
-                    <span data-feather="users"></span>
-                    Members
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="{{ route('member.current') }}">
                     <span data-feather="file-text"></span>
                     Current Members
@@ -64,6 +69,30 @@
                 <a class="nav-link" href="{{ route('member.past') }}">
                     <span data-feather="file-text"></span>
                    Past Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.sahayak') }}">
+                    <span data-feather="file-text"></span>
+                    Sahayak Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.full') }}">
+                    <span data-feather="file-text"></span>
+                    Full Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.paid') }}">
+                    <span data-feather="file-text"></span>
+                    Paid up Sahayak Members
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.paid') }}">
+                    <span data-feather="file-text"></span>
+                    Paid up Full Members
                 </a>
             </li>
 

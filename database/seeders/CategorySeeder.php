@@ -14,7 +14,7 @@ class CategorySeeder extends Seeder
      */
     public function run()
     {
-        $categories=['Normal','Sahiliya'];
+        $categories=['Sahayak','Full'];
         foreach ($categories as $category){
             DB::table('categories')->insert([
                 'name' =>$category,

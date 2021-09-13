@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Imports\MembersImport;
-use App\Models\Category;
 use App\Models\Member;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+
+
 
 class MemberController extends Controller
 {
@@ -20,19 +21,48 @@ class MemberController extends Controller
      */
     public function index(){
 
-       $members= Member::with('category')->paginate(10);
-       return view('members.index',compact('members'));
+        $members=['title'=>"All Members",
+            'link'=>'allmembers',
+        ];
+
+        return view('members.index',compact('members'));
+
     }
     public function current()
     {
-        $members=Member::where('status','=',true)->paginate(10);
+        $members=['title'=>"Current Members",
+                    'link'=>'currentmembers',
+            ];
         return view('members.index',compact('members'));
     }
     public function past()
     {
-        $members= Member::where('status','=',false)->paginate(10);
+        $members=['title'=>"Past Members",
+            'link'=>'pastmembers',
+        ];
         return view('members.index',compact('members'));
     }
+    public function sahayak()
+    {
+        $members=['title'=>"Sahayak Members",
+            'link'=>'getsahayak',
+        ];
+        return view('members.index',compact('members'));
+    }
+    public function fullMember()
+    {
+        $members=['title'=>"Full Members",
+            'link'=>'getfullmember',
+        ];
+        return view('members.index',compact('members'));
+    }
+    public function paidUp()
+    {
+        //$members= Member::where('category_id','=',2)->paginate(20);
+       // return view('members.index',compact('members'));
+        abort(403);
+    }
+
 
 
     /**

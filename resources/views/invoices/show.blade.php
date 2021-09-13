@@ -4,9 +4,9 @@
 
 
 <!--include css--->
-@push('styles')
+@section('styles')
 <link href="{{ asset('css/invoice.css') }}" rel="stylesheet">
-@endpush
+@endsection
 
 <!--End of css-->
 

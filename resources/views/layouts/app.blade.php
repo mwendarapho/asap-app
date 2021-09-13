@@ -18,7 +18,8 @@
     @livewireStyles
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard.css') }}" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 
     @yield('styles')
     <style>
@@ -45,6 +46,7 @@
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
+
                     <ul class="navbar-nav mr-auto d-md-none d-sm-block">
                         @auth()
                         <li class="nav-item">
@@ -70,6 +72,7 @@
 
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
+
                         <!-- Authentication Links -->
                         @guest
                         @if (Route::has('login'))
@@ -127,6 +130,9 @@
     <script type="text/javascript">
         $('.alert').fadeOut(6000);
     </script>
+
+
+
     @yield('scripts')
 
 @include('layouts.facebook_messager')

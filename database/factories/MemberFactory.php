@@ -34,6 +34,7 @@ class MemberFactory extends Factory
             'joined_on'=>$this->faker->date(),
             'left_on'=>$this->faker->date(),
             'status'=>$this->faker->boolean(),
+            'category_id'=>$this->faker->numberBetween(1,2),
         ];
     }
 }

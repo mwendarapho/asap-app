@@ -28,6 +28,7 @@ class MembersImport implements ToModel
             'left_on' => $row[9],
            // 'status' => $row[10],
             'status'=>($row[10]!='')? false: true,
+            'category_id'=>($row[11]=='')? 1: $row[11],
         ]);
     }
 }
