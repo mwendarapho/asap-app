@@ -14,7 +14,7 @@ class AddCategoriesColumnInMembers extends Migration
     public function up()
     {
         Schema::table('members', function (Blueprint $table) {
-            $table->foreignId('category_id')->default(1);
+            $table->foreignId('category_id')->constrained();
         });
     }
 
