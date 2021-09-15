@@ -15,13 +15,14 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
+        $this->call(CategorySeeder::class);
         $this->call(MemberSeeder::class);
         $this->call(TaxSeeder::class);
         $this->call(PaymodeSeeder::class);
         //$this->call(PaymentSeeder::class);
         //$this->call(InvoiceSeeder::class);
        // $this->call(ItemSeeder::class);
-        $this->call(CategorySeeder::class);
+
 
 
     }

@@ -189,6 +189,23 @@
                                 </div>
                             </div>
 
+                            <div class="row p-2">
+                                <span for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</span>
+
+                                <div class="form-check form-check-inline">
+                                    @foreach($categories as $category)
+                                        <input type="radio" class="form-check-input" name="category_id" id="{{ $category->id }}" {{ ($member->category_id==$category->id) ?  'checked="checked"': '' }} value="{{ $category->id}}">
+                                        <label class="form-check-label" for="{{$category->id}}">  {{ $category->name }} </label>
+                                    @endforeach
+
+                                    @error('category_id')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
+
 
                             <div class="form-group row mb-0">
                                 <div class="col-md-6 offset-md-4">

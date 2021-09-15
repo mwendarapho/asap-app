@@ -110,8 +110,8 @@ class MemberController extends Controller
      */
     public function edit(Member $member)
     {
-        //dd($member);
-        return view('members.edit',compact('member'));
+        $categories=DB::table('categories')->select('id','name')->get();
+        return view('members.edit',compact('member','categories'));
     }
 
     /**
@@ -123,11 +123,13 @@ class MemberController extends Controller
      */
     public function update(MemberRequest $request, Member $member)
     {
-        //dd($request->left_on);
-        $data=$request->validated();
-        ($request->left_on!='')? $data['status']=false: $data['status']=true;
+        //dd($request);
 
-        //dd($data);
+        $data=$request->validated();
+
+        ($request->left_on!='')? $data['status']=false: $data['status']=true;
+        ($request->category_id!='')? $data['category_id']: $data['category_id']=1;
+        
         $member->update($data);
         return redirect()->route('member.show',compact('member'))->with(['message'=>'updated successfully']);
     }

@@ -157,13 +157,14 @@
                                     </div>
                                 </div>
 
-                                <div class="form-group row">
-                                    <label for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</label>
 
-                                    <div class="col-md-6 form-check form-check-inline">
+                                <div class="row p-2">
+                                    <span for="category_id" class="col-md-4 col-form-label text-md-right">{{ __('Category') }}</span>
+
+                                    <div class="form-check form-check-inline">
                                         @foreach($categories as $category)
-                                        <input type="radio" class="form-check-input" name="category_id" value="{{ $category->id}}">
-                                            <label class="form-check-label" for="category_id"> {{ $category->name }}</label>
+                                        <input type="radio" class="form-check-input" name="category_id" id="{{ $category->id }}" {{ ($category->id==1) ?  'checked="checked"': '' }} value="{{ $category->id}}">
+                                            <label class="form-check-label" for="{{$category->id}}">  {{ $category->name }} </label>
                                         @endforeach
 
                                         @error('category_id')

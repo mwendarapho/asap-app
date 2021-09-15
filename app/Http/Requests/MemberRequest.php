@@ -34,6 +34,7 @@ class MemberRequest extends FormRequest
             'spouse_mobile'=>'nullable | numeric',
             'joined_on'=> 'nullable | date | before_or_equal:today',
             'left_on'=> 'nullable | date | after_or_equal:joined_on',
+            'category_id'=>'numeric',
 
         ];
     }
