@@ -86,16 +86,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('member.paid') }}">
                     <span data-feather="file-text"></span>
-                    Paid up Sahayak Members
+                    Paid Up Members
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('member.paid') }}">
-                    <span data-feather="file-text"></span>
-                    Paid up Full Members
-                </a>
-            </li>
-
 
         </ul>
     </div>

@@ -60,6 +60,14 @@
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         @php $balance+=$payment->amount @endphp
                     </tr>
+                    <tr>
+                        <td colspan="3" class="font-weight-bold">
+                            @php
+                            $f = new NumberFormatter("en", NumberFormatter::SPELLOUT);
+                             echo strtoupper($f->format($balance)).' SHILLINGS ONLY';
+                            @endphp
+                        </td>
+                    </tr>
 
                     <tfoot>
                     <tr>

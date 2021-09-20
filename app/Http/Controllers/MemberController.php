@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Traits\MemberTrait;
 use App\Imports\MembersImport;
 use App\Models\Member;
 use Illuminate\Http\Request;
@@ -13,7 +14,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
-    public $members;
+
     /**
      * Display a listing of the resource.
      *
@@ -58,9 +59,11 @@ class MemberController extends Controller
     }
     public function paidUp()
     {
-        //$members= Member::where('category_id','=',2)->paginate(20);
-       // return view('members.index',compact('members'));
-        abort(403);
+
+        $members=['title'=>"Paid-Up Members",
+            'link'=>'getpaidupmember',
+        ];
+        return view('members.index',compact('members'));
     }
 
 
@@ -129,7 +132,7 @@ class MemberController extends Controller
 
         ($request->left_on!='')? $data['status']=false: $data['status']=true;
         ($request->category_id!='')? $data['category_id']: $data['category_id']=1;
-        
+
         $member->update($data);
         return redirect()->route('member.show',compact('member'))->with(['message'=>'updated successfully']);
     }

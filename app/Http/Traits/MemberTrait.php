@@ -88,11 +88,17 @@ trait MemberTrait
         }
 
 
-        //  $log = DB::getQueryLog();
-        // dump($log);
+         // $log = DB::getQueryLog();
+         //dump($log);
 
         return ["credit" => ($paymenttotal[0]->amount) ?: 0, "debit" => ($invoicetotal[0]->amount) ?: 0];
 
 
+    }
+
+
+    public function memberBalances($date, $member_id)
+    {
+        return $this->allMembers();
     }
 }

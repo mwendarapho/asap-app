@@ -68,7 +68,7 @@
                         <td>{{$transaction->date}}</td>
                         <td><a href="{{ ($transaction->owed ==0 ? ($transaction->credit!=0 ? 'credit' : 'payment') : 'invoice').'/'.$transaction->docno}}">
                                 <span data-feather="arrow-right-circle" class="small text-success d-print-none"></span>
-                            </a>{{ ($transaction->owed ==0 ? ($transaction->credit!=0 ? 'CRD' : 'RCT') : 'INV'). $transaction->docno}}</td>
+                            </a>{{ ($transaction->owed ==0 ? ($transaction->credit!=0 ? 'CRD' : 'RCT') : 'INV').$transaction->docno}}</td>
                         <td>{{$transaction->fname .' '.$transaction->lname }}</td>
                         <td>{{ ($transaction->owed ==0 ? ($transaction->credit!=0 ? 'CRD' : 'RCT') : 'INV') }}</td>
                         <td>{{ number_format($debit=$transaction->owed, 2) }}</td>

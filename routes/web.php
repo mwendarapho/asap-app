@@ -5,6 +5,7 @@ use App\Http\Controllers\MemberController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\CreditnoteController;
+use App\Http\Controllers\DatatablesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -56,11 +57,14 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('allmembers', [App\Http\Controllers\DatatablesController::class, 'getAllMembers'])->name('allmembers');
-Route::get('currentmembers', [App\Http\Controllers\DatatablesController::class, 'currentMembers'])->name('currentmembers');
-Route::get('pastMembers', [App\Http\Controllers\DatatablesController::class, 'pastMembers'])->name('pastmembers');
-Route::get('getsahayak', [App\Http\Controllers\DatatablesController::class, 'getSahayak'])->name('getsahayak');
-Route::get('getfullmember', [App\Http\Controllers\DatatablesController::class, 'getFullMember'])->name('getfullmember');
 
-Route::get('testmembers', [App\Http\Controllers\DatatablesController::class, 'index'])->name('testmembers');
+//get api data
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('allmembers', [DatatablesController::class, 'getAllMembers'])->name('allmembers');
+Route::get('currentmembers', [DatatablesController::class, 'currentMembers'])->name('currentmembers');
+Route::get('pastMembers', [DatatablesController::class, 'pastMembers'])->name('pastmembers');
+Route::get('getsahayak', [DatatablesController::class, 'getSahayak'])->name('getsahayak');
+Route::get('getfullmember', [DatatablesController::class, 'getFullMember'])->name('getfullmember');
+Route::get('getpaidupmember', [DatatablesController::class, 'getPaidUpMember'])->name('getpaidupmember');
+
+//Route::get('testmembers', [DatatablesController::class, 'index'])->name('testmembers');

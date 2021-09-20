@@ -211,4 +211,5 @@ class PaymentController extends Controller
         return view('statements.member_statement', compact('members'));
 
     }
+
 }
