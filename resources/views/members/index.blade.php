@@ -18,6 +18,7 @@
 <table class="table table-hover table-responsive-sm" id="membersTable">
     <thead>
     <tr>
+        <th class="d-print-none"></th>
         <th>id</th>
         <th>First Name</th>
         <th>Last Name</th>
@@ -25,8 +26,8 @@
         <th>Email</th>
         <th>Category</th>
         <th>Status</th>
-        <th class="d-print-none">del</th>
-        <th class="d-print-none">show</th>
+
+        <th class="d-print-none">Del</th>
 
         {{--<th class="d-print-none">Category_id</th>
        <th class="d-print-none">created_at</th>
@@ -41,7 +42,7 @@
 
     <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js" defer></script>
 
-    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.js"></script>
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.js"></script>-->
 
 
 
@@ -56,6 +57,11 @@
 
                 ajax: getdata,
                 columns: [
+                    {"data": "show",
+                        'orderable': false,
+                        'searchable': false,
+                        'exportable': false,
+                        'printable': false},
                     { data: 'id', name: 'members.id' },
                     { data: 'fname', name: 'members.fname' },
                     { data: 'lname', name: 'members.lname' },
@@ -63,11 +69,7 @@
                     { data: 'email', name: 'members.email' },
                     { data: 'name', name: 'categories.name' },
                     { data: 'status', name: 'members.status' },
-                    {"data": "show",
-                        'orderable': false,
-                        'searchable': false,
-                        'exportable': false,
-                        'printable': false},
+
                     {"data": "del",
                         'orderable': false,
                         'searchable': false,

@@ -122,7 +122,7 @@ class DatatablesController extends Controller
             ->select('members.id', 'members.fname', 'members.lname', 'members.mobile', 'members.email', 'members.status', 'categories.name');
         return DataTables::of($query)
             ->editColumn('status', '{{ ($status? "active" : "inactive") }}')
-            ->addColumn('show', '<a class="btn btn-outline-primary btn-sm" href="member/{{$id}}" ><i class="far fa-arrow-alt-circle-right"></i> More</a>')
+            ->addColumn('show', '<a class="btn btn-outline-primary btn-sm" href="member/{{$id}}" ><span data-feather="arrow-right-circle" class="small text-success"></span>More</a>')
             ->addColumn('del', '<a class="btn btn-outline-danger btn-sm" id="delete-member" href="member/{{$id}}"><i class="fas fa-trash-alt"></i> Del</a>')
             ->rawColumns([
                 'show', 'del'
@@ -130,7 +130,7 @@ class DatatablesController extends Controller
             ->make(true);
 
     }
-    /*public function getPaidUpSahayak()
+    public function getMembersWithBalances()
     {
         $data=[];
         $members=$this->allMembers();
@@ -144,10 +144,11 @@ class DatatablesController extends Controller
         }
         $query = DB::table('members')
             ->join('categories', 'categories.id', '=', 'members.category_id')
-            ->whereIn('members.id', $data)
+            ->whereNotIn('members.id', $data)
             ->select('members.id', 'members.fname', 'members.lname', 'members.mobile', 'members.email', 'members.status', 'categories.name');
         return DataTables::of($query)
             ->editColumn('status', '{{ ($status? "active" : "inactive") }}')
+            ->addColumn('balance', 200.50)
             ->addColumn('show', '<a class="btn btn-outline-primary btn-sm" href="member/{{$id}}" ><i class="far fa-arrow-alt-circle-right"></i> More</a>')
             ->addColumn('del', '<a class="btn btn-outline-danger btn-sm" id="delete-member" href="member/{{$id}}"><i class="fas fa-trash-alt"></i> Del</a>')
             ->rawColumns([
@@ -155,7 +156,7 @@ class DatatablesController extends Controller
             ])
             ->make(true);
 
-    }*/
+    }
 
     public function index(MemberDataTable $dataTable)
     {

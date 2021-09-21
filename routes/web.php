@@ -27,6 +27,7 @@ Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::get('sahayak',[MemberController::class,'sahayak'])->name('member.sahayak');
 Route::get('full-member',[MemberController::class,'fullMember'])->name('member.full');
 Route::get('paidup-member',[MemberController::class,'paidUp'])->name('member.paid');
+    Route::get('notpaidup-member',[MemberController::class,'notPaidUp'])->name('member.notpaid');
 
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);
@@ -66,5 +67,6 @@ Route::get('pastMembers', [DatatablesController::class, 'pastMembers'])->name('p
 Route::get('getsahayak', [DatatablesController::class, 'getSahayak'])->name('getsahayak');
 Route::get('getfullmember', [DatatablesController::class, 'getFullMember'])->name('getfullmember');
 Route::get('getpaidupmember', [DatatablesController::class, 'getPaidUpMember'])->name('getpaidupmember');
+Route::get('getmemberswithbalances', [DatatablesController::class, 'getMembersWithBalances'])->name('getmemberswithbalances');
 
 //Route::get('testmembers', [DatatablesController::class, 'index'])->name('testmembers');

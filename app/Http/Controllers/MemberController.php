@@ -65,7 +65,14 @@ class MemberController extends Controller
         ];
         return view('members.index',compact('members'));
     }
+    public function notPaidUp()
+    {
 
+        $members=['title'=>"Members With Balances",
+            'link'=>'getmemberswithbalances',
+        ];
+        return view('members.index',compact('members'));
+    }
 
 
     /**

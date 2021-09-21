@@ -89,6 +89,12 @@
                     Paid Up Members
                 </a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('member.notpaid') }}">
+                    <span data-feather="file-text"></span>
+                    Members with Balances
+                </a>
+            </li>
 
         </ul>
     </div>
