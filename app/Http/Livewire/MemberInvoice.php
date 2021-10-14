@@ -14,8 +14,11 @@ class MemberInvoice extends Component
     protected $queryString = ['member_id'];
     public $members;
 
+
+
     public function render()
     {
+
 
         $this->invoices = DB::table('invoices')
             ->where('member_id', '=', $this->member_id)

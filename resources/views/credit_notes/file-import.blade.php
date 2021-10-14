@@ -1,12 +1,11 @@
 @extends('layouts.app')
-@section('title','Import Members')
+@section('title','Import Credit Note')
 
 @section('content')
     <div class="container mt-5 text-center">
         <h2 class="mb-4">
-            Members Import [ CSV ]
+            Credit Note Import [ CSV ]
         </h2>
-
         @if (session('status'))
             <div class="alert alert-success" role="alert">
                 {{ session('status') }}
@@ -18,7 +17,7 @@
             </div>
         @endif
 
-        <form action="{{ route('importmember') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('importcreditnote') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group mb-4" style="max-width: 500px; margin: 0 auto;">
                 <div class="custom-file text-left">

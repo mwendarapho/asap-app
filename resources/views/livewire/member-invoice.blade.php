@@ -22,7 +22,6 @@
 <td width="20%">
 
     <div>
-        {{-- Knowing others is intelligence; knowing yourself is true wisdom. --}}
 
 
         <select

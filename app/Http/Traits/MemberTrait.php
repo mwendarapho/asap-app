@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 trait MemberTrait
 {
+    public $paid_up_date;
 
 
     public function currentMembers()
@@ -96,9 +97,39 @@ trait MemberTrait
 
     }
 
+    public function memberBalances($date){
+        $query="select T6.member_id,T6.fname,T6.lname,T6.mobile,T6.email,T6.category_id,T6.status,sum(credit+refund-debit) AS bal from
+                    (
+                        select  docno, member_id,date,T5.fname,T5.lname,T5.email,T5.mobile,T5.category_id,T5.status,
+                          sum(case when doctype = 'INV' then amount else 0 end) debit,
+                          sum(case when doctype = 'RCT' then amount else 0 end) credit,
+                           sum(case when doctype = 'CRD' then amount else 0 end) refund
 
-    public function memberBalances($date, $member_id)
-    {
-        return $this->allMembers();
+                        from
+
+                        (
+                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
+                        from invoices T1 join items T2 on T1.id=T2.invoice_id
+                        group by T2.invoice_id
+
+                        union all
+
+                        select T3.id as docno,T3.member_id, T3.pay_date as date,  T3.amount,'RCT' as doctype
+                        from payments T3
+                          union all
+                           select T7.id as docno, T7.member_id,T7.credit_date as date, T7.amount, 'CRD' as doctype
+                              from creditnotes T7
+
+                          ) T4
+                          join members T5 on T4.member_id=T5.id
+
+                        WHERE  date < :date
+                        GROUP BY docno,member_id,date
+                    ) T6
+
+                    group by member_id
+                    ";
+        return DB::select(DB::raw($query), ['date' => $date]);
     }
+
 }

@@ -18,7 +18,7 @@ $balance=0;
     </div>
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-condensed table-striped table-responsive-sm">
+            <table class="table table-condensed table-striped table-responsive-sm" id="payment">
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -69,4 +69,11 @@ $balance=0;
 
 
 </div>
+    @section('scripts')
+    <script>
+        $(document).ready(function() {
+            $('#payment').DataTable();
+        } );
+    </script>
+    @endsection
 @endsection

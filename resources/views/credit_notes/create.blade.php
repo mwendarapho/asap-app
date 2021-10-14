@@ -41,6 +41,14 @@
                                 </div>
                             </div>
 
+                            <div class="form-group row">
+                                <label for="member_id"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Member') }}
+                                </label>
+
+
+                            </div>
+
 
 
                             <!--Items lists start-->

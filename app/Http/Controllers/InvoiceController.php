@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\InvoicesImport;
 use App\Models\Invoice;
 use App\Models\Item;
 use App\Models\Member;
@@ -9,7 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\InvoiceRequest;
 use Illuminate\Support\Facades\DB;
 use App\Http\Traits\MemberTrait;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class InvoiceController extends Controller
@@ -146,5 +147,16 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+    public function importInvoice()
+    {
+        return view('invoices.file-import');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new InvoicesImport, $request->file('file')->store('temp'));
+        //Excel::import(new InvoicesImport, 'temp/invoices_all_13_21.txt');
+        return back()->with(['message'=>'Imported successfully']);
     }
 }

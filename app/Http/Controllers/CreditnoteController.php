@@ -3,10 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\MemberTrait;
+use App\Imports\CreditnoteImport;
+use App\Imports\PaymentImport;
 use App\Models\Creditnote;
 use App\Models\Invoice;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreditRequest;
+use Maatwebsite\Excel\Facades\Excel;
 
 
 class CreditnoteController extends Controller
@@ -20,6 +23,7 @@ class CreditnoteController extends Controller
      */
     public function index()
     {
+
         $credits=Creditnote::with('member')->paginate();
         return view('credit_notes.index',compact('credits'));
     }
@@ -31,9 +35,6 @@ class CreditnoteController extends Controller
      */
     public function create()
     {
-       // $invoices=Invoice::all();
-        //->pluck('fname,lname','id')
-
         $members=$this->allMembers();
 
         return view('credit_notes.create',compact(['members']));
@@ -99,5 +100,15 @@ class CreditnoteController extends Controller
     public function destroy(Creditnote $credit)
     {
         //
+    }
+    public function importCreditnote()
+    {
+        return view('credit_notes.file-import');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new CreditnoteImport, $request->file('file')->store('temp'));
+        return back()->with(['message'=>'Imported successfully']);
     }
 }

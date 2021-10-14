@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Traits\MemberTrait;
 use App\Imports\MembersImport;
 use App\Models\Member;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Requests\MemberRequest;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 class MemberController extends Controller
 {
-
+use MemberTrait;
     /**
      * Display a listing of the resource.
      *
@@ -59,6 +60,11 @@ class MemberController extends Controller
     }
     public function paidUp()
     {
+      /*  $request->validate([
+            'to_date' => 'required|date',
+        ]);
+        $this->paid_up_date=Carbon::parse($request['to_date'])->format('Y-m-d');
+      */
 
         $members=['title'=>"Paid-Up Members",
             'link'=>'getpaidupmember',
@@ -72,6 +78,12 @@ class MemberController extends Controller
             'link'=>'getmemberswithbalances',
         ];
         return view('members.index',compact('members'));
+    }
+
+    public function paidUpFilter()
+    {
+        return view('members.member_filter');
+
     }
 
 
@@ -164,6 +176,7 @@ class MemberController extends Controller
     public function fileImport(Request $request)
     {
         Excel::import(new MembersImport, $request->file('file')->store('temp'));
+        //Excel::import(new MembersImport, 'temp/members.txt');
         return back()->with(['message'=>'Imported successfully']);
     }
 }

@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\InvoicesImport;
+use App\Imports\PaymentImport;
 use App\Models\Payment;
 use Illuminate\Http\Request;
 use App\Http\Traits\MemberTrait;
 use Illuminate\Support\Facades\DB;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PaymentController extends Controller
 {
@@ -22,7 +25,10 @@ class PaymentController extends Controller
         $payments = Payment::with('member')
             ->with('paymode')
             ->oldest('pay_date', 'asc')
-            ->paginate(10);
+            ->orderBy('member_id')
+            ->paginate(100);
+        //->get();
+        //dd($payments->fname);
         return view('receipts.index', compact('payments'));
     }
 
@@ -60,7 +66,7 @@ class PaymentController extends Controller
         if ($request->member_id == 000) {
 
             $transaction1 = " WHERE date >= :from_date
-                            and   date <= :to_date GROUP BY T4.docno,T4.member_id,T4.date order by T4.date";
+                            and   date <= :to_date GROUP BY T4.docno,T4.member_id,T4.date order by T4.member_id, T4.date";
 
             $transactions .= $transaction1;
 
@@ -210,6 +216,17 @@ class PaymentController extends Controller
         $members = $this->allMembers();
         return view('statements.member_statement', compact('members'));
 
+    }
+
+    public function importPayment()
+    {
+        return view('payment.file-import');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new PaymentImport, $request->file('file')->store('temp'));
+        return back()->with(['message'=>'Imported successfully']);
     }
 
 }

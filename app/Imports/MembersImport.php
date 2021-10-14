@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Models\Member;
 use Maatwebsite\Excel\Concerns\ToModel;
 
+
 class MembersImport implements ToModel
 {
     /**
@@ -26,9 +27,9 @@ class MembersImport implements ToModel
             'spouse_mobile' => $row[7],
             'joined_on' => $row[8],
             'left_on' => $row[9],
-           // 'status' => $row[10],
-            'status'=>($row[10]!='')? false: true,
-            'category_id'=>($row[11]=='')? 1: $row[11],
+            'status' => 1,
+            //'status'=>($row[10]!='')? false: true,
+            'category_id'=>($row[11]=='S')? 1: 2,
         ]);
     }
 }
