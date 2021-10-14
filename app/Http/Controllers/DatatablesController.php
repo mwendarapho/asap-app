@@ -175,4 +175,6 @@ class DatatablesController extends Controller
 
         return $dataTable->render('members.vio');
     }
+
+
 }

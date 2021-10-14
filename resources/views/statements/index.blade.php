@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('title','Statement')
 
+@section('styles')
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.css"/>
+@endsection
+
 @section('content')
 
     {{--
@@ -26,15 +31,18 @@
     </table>
 
 
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-12">
             <h1></h1>
         </div>
     </div>
+
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-condensed table-striped table-responsive-sm">
+
+            <table class="table table-condensed table-striped table-responsive-sm" id="statement">
                 <thead>
                     <tr>
                         <th scope="col">Date</th>
@@ -127,5 +135,22 @@
         </div>
     </div>
 </div>
+
+@stop
+@section('scripts')
+    <!-- DataTables -->
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js" defer></script>
+
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.js"></script>-->
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('#statement').DataTable();
+        } );
+
+    </script>
 
 @endsection

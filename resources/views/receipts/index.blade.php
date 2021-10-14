@@ -1,5 +1,9 @@
 @extends('layouts.app')
 @section('title','Payments')
+@section('styles')
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.css"/>
+@endsection
 
 @section('content')
 @php
@@ -11,11 +15,13 @@ $balance=0;
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12 py-md-2">
             <h1>Payments</h1>
             <a href="{{ route('payment.create') }}" class="btn btn-sm btn-success">Receive payment</a>
         </div>
+
     </div>
+
     <div class="row">
         <div class="col-md-12">
             <table class="table table-condensed table-striped table-responsive-sm" id="payment">
@@ -61,19 +67,28 @@ $balance=0;
                 </tbody>
 
             </table>
-            <div class="container-fluid align-content-lg-center">
-                {{ $payments->links() }}
-            </div>
+
         </div>
     </div>
 
 
 </div>
-    @section('scripts')
-    <script>
+
+@stop
+@section('scripts')
+    <!-- DataTables -->
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js" defer></script>
+
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.js"></script>-->
+
+
+    <script type="text/javascript">
+
         $(document).ready(function() {
             $('#payment').DataTable();
         } );
+
     </script>
-    @endsection
+
 @endsection

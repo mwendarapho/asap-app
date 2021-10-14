@@ -1,5 +1,9 @@
 @section('title', 'Invoices')
 @extends('layouts.app')
+@section('styles')
+
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.css"/>
+@endsection
 @section('content')
 <div class="container py-3">
 <h1>Invoices</h1>
@@ -7,7 +11,7 @@
 
     </div>
 
-    <table class="table table-hover">
+    <table class="table table-hover" id="invoice">
         <thead>
         <tr>
 
@@ -34,5 +38,22 @@
     <div class="container-fluid align-content-lg-center">
         {{-- $invoices->links() --}}
     </div>
+
+@stop
+@section('scripts')
+    <!-- DataTables -->
+
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jq-3.3.1/dt-1.10.18/datatables.min.js" defer></script>
+
+    <!--<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.js"></script>-->
+
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+            $('#invoice').DataTable();
+        } );
+
+    </script>
 
 @endsection
