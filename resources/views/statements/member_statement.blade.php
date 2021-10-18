@@ -89,7 +89,7 @@
                                 <div class="form-group row mb-0 col-md-6">
                                     <div class="col-md-12 text-md-right">
                                         <button type="submit" class="btn btn-secondary" id="submit">
-                                            {{ __('Save Invoice') }}
+                                            {{ __('Save') }}
                                         </button>
                                     </div>
                                 </div>
