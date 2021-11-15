@@ -29,7 +29,7 @@
                                     <input id="from_date" type="date" class="form-control
                                             @error('from_date') is-invalid @enderror"
                                            name="from_date"
-                                           value="{{ old('from_date') }}@php echo date('Y-m-01'); @endphp" required
+                                           value="{{ old('from_date') }}@php echo date('2013-01-01'); @endphp" required
                                            autocomplete="from_date">
 
                                     @error('from_date')

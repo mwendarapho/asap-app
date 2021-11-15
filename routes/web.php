@@ -28,10 +28,13 @@ Route::get('member-current',[MemberController::class,'current'])->name('member.c
 Route::get('member-past',[MemberController::class,'past'])->name('member.past');
 Route::get('sahayak',[MemberController::class,'sahayak'])->name('member.sahayak');
 Route::get('full-member',[MemberController::class,'fullMember'])->name('member.full');
-Route::get('paidup-member',[MemberController::class,'paidUp'])->name('member.paid');
-/*Route::get('paidup-member',[MemberController::class,'paidUpFilter'])->name('member.paid');*/
+//Route::get('paidup-member',[MemberController::class,'paidUp'])->name('member.paid');
+Route::get('paidup-member',[MemberController::class,'paidUpFilter'])->name('member.paid');
+//Route::get('notpaidup-member',[MemberController::class,'paidUpFilter'])->name('member.paid');
 
-Route::get('notpaidup-member',[MemberController::class,'notPaidUp'])->name('member.notpaid');
+Route::post('paidup',[MemberController::class,'paidup'])->name('member.paidup');
+
+//Route::get('notpaidup-member',[MemberController::class,'notPaidUp'])->name('member.notpaid');
 
 Route::resource('invoice',\App\Http\Controllers\InvoiceController::class);
 Route::resource('item',ItemController::class);

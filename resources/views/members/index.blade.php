@@ -35,6 +35,26 @@
 
     </tr>
     </thead>
+
+    <tfoot>
+        <tr>
+            <th class="d-print-none"></th>
+            <th>id</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Category</th>
+            <th>Status</th>
+    
+                {{--<th class="d-print-none">Del</th>
+    
+        <th class="d-print-none">Category_id</th>
+           <th class="d-print-none">created_at</th>
+           <th class="d-print-none">updated_at</th>--}}
+    
+        </tr>
+    </tfoot>
 </table>
 @stop
 @section('scripts')
@@ -78,7 +98,22 @@
 
 
 
-                ]
+                ],
+
+                initComplete: function () {
+                        this.api().columns().every(function () {
+                            var column = this;
+                            var input = document.createElement("input");
+                            $(input).appendTo($(column.footer()).empty())
+                            .on('change', function () {
+                                var val = $.fn.dataTable.util.escapeRegex($(this).val());
+
+                                column.search(val ? val : '', true, false).draw();
+                            });
+                        });
+                    }
+
+                
             });
 
         });

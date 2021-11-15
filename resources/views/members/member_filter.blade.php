@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Statement')
+@section('title','Paid-Up Members')
 
 @section('content')
     <div class="container">
@@ -17,7 +17,7 @@
                     @endif
 
                     <div class="card-body">
-                        <form method="POST" action="{{ route('member.paid') }}">
+                        <form method="POST" action="{{ route('member.paidup') }}">
                             @csrf
 
 
@@ -33,6 +33,29 @@
                                            autocomplete="to_date">
 
                                     @error('to_date')
+                                    <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                    @enderror
+                                </div>
+                            </div>
+
+
+                             <div class="form-group row">
+                                <label for="group"
+                                       class="col-md-4 col-form-label text-md-right">{{ __('Group') }}</label>
+
+                                <div class="col-md-6">
+
+                                    <select class="form-control @error('group') is-invalid @enderror"
+                                            name="group" id="group" required>
+                                        <option value="" selected>{{ 'Choose Group' }}</option>
+                                        <option value="1" >{{ 'Paid Up' }}</option>
+                                        <option value="2" >{{ 'Not Paid' }}</option>
+
+                                    </select>
+
+                                    @error('group')
                                     <span class="invalid-feedback" role="alert">
                                     <strong>{{ $message }}</strong>
                                 </span>

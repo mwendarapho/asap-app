@@ -86,15 +86,10 @@
             <li class="nav-item">
                 <a class="nav-link" href="{{ route('member.paid') }}">
                     <span data-feather="file-text"></span>
-                    Paid Up Members
+                    Pay Status
                 </a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('member.notpaid') }}">
-                    <span data-feather="file-text"></span>
-                    Members with Balances
-                </a>
-            </li>
+           
 
         </ul>
     </div>

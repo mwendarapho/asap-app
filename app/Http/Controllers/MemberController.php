@@ -58,20 +58,36 @@ use MemberTrait;
         ];
         return view('members.index',compact('members'));
     }
-    public function paidUp()
+    public function paidUp(Request $request)
     {
-      /*  $request->validate([
-            'to_date' => 'required|date',
-        ]);
-        $this->paid_up_date=Carbon::parse($request['to_date'])->format('Y-m-d');
-      */
 
-        $members=['title'=>"Paid-Up Members",
-            'link'=>'getpaidupmember',
-        ];
-        return view('members.index',compact('members'));
+        $request->validate([
+            'to_date' => 'required|date',
+            'group'=>'required | integer',
+        ]);
+
+    session(['paid_up_date' => $request['to_date']]);
+
+        if($request['group']==1){
+
+            $members=['title'=>"Paid-Up Members",
+                    'link'=>'getpaidupmember',
+                ];
+                return view('members.index',compact('members'));
+
+        }else{
+
+
+         $members=['title'=>"Members With Balances",
+                    'link'=>'getmemberswithbalances',
+                ];
+                return view('members.index',compact('members'));
+
+        }
+       
+        
     }
-    public function notPaidUp()
+/*    public function notPaidUp(Request $request)
     {
 
         $members=['title'=>"Members With Balances",
@@ -79,12 +95,16 @@ use MemberTrait;
         ];
         return view('members.index',compact('members'));
     }
-
+*/
     public function paidUpFilter()
     {
         return view('members.member_filter');
 
     }
+
+   /* public function paidUp(Request $request){
+        dd($request);
+    }*/
 
 
     /**
@@ -179,4 +199,6 @@ use MemberTrait;
         //Excel::import(new MembersImport, 'temp/members.txt');
         return back()->with(['message'=>'Imported successfully']);
     }
+
+   
 }

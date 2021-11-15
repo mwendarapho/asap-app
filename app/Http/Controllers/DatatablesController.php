@@ -109,8 +109,8 @@ class DatatablesController extends Controller
     {
        $data=[];
        $members=$this->allMembers();
-        $last_day_of_feb=Carbon::now()->month(2)->lastOfMonth()->toDateString();
-        //$last_day_of_feb= $this->paid_up_date;
+       
+       $last_day_of_feb=session('paid_up_date');
 
         //dd($members);
 
@@ -137,14 +137,14 @@ class DatatablesController extends Controller
             ])
             ->make(true);
 
-    }
+    } 
     public function getMembersWithBalances()
     {
 
         $data=[];
         $members=$this->allMembers();
-        $last_day_of_feb=Carbon::now()->month(2)->lastOfMonth()->toDateString();
-       // $last_day_of_feb='2022-02-28';
+   
+        $last_day_of_feb=session('paid_up_date');
 
         foreach($members as $member) {
             $res=$this->balanceBroughtForward($last_day_of_feb, $member->id);

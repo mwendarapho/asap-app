@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\DB;
 
 trait MemberTrait
 {
-    public $paid_up_date;
-
-
+   
     public function currentMembers()
     {
 
