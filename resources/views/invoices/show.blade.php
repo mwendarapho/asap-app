@@ -85,14 +85,14 @@
                             <tr class="add">
                                 <td></td>
                                 <td>Subtotal</td>
-                                <td>Tax(16%)</td>
+                                <td></td>
                                 <td class="text-center">Total</td>
                             </tr>
                             <tr class="content">
                                 <td></td>
                                 <td>{{number_format($total,2)}}</td>
-                                <td>{{number_format($total*0.16,2)}}</td>
-                                <td class="text-center">{{number_format($total*1.16,2)}}</td>
+                                <td>{{--number_format($total*0.16,2)--}}</td>
+                                <td class="text-center">{{number_format($total,2)}}</td>
                             </tr>
                         </tbody>
                     </table>
