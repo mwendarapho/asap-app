@@ -102,6 +102,9 @@ class InvoiceController extends Controller
         //DB::enableQueryLog();
 
         $totalinvoice = Invoice::count();
+        $transactions=[];
+        $balBF=[];
+        $dateRange=[];
 
         $items = DB::table('items')
             ->select('qty', 'description', 'amount')
@@ -110,7 +113,7 @@ class InvoiceController extends Controller
 
 
 
-        return view('invoices.show', compact(['invoice', 'items', 'totalinvoice']));
+        return view('invoices.show', compact(['invoice', 'items', 'totalinvoice','transactions', 'balBF','dateRange']));
         //$log = DB::getQueryLog();
         //dump($log);
     }
