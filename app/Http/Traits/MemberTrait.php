@@ -133,10 +133,11 @@ trait MemberTrait
     public function memberSummaryStatement($to_date, $member_id)
     {
 
-        $to_date=Carbon::parse($to_date)->addYear(1)->format('Y-m-d');
-        
+        $to_date=Carbon::parse($to_date)->addYear(1)->format('Y-m-d');        
         $from_date =Carbon::parse($to_date)->subYear(4)->format('Y-m-d');
-        $balBF = $this->balanceBroughtForward($to_date, $member_id);
+
+        //dd($from_date);
+        $balBF = $this->balanceBroughtForward($from_date, $member_id);
 
         $transactions = "select  docno, member_id,date,T7.fname,T7.lname,
                         sum(case when doctype = 'INV' then amount else 0 end) owed,
