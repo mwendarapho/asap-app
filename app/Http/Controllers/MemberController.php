@@ -141,7 +141,8 @@ use MemberTrait;
      */
     public function show(Member $member)
     {
-        return view('members.show',compact('member'));
+        $totalmember = Member::count();
+        return view('members.show',compact(['member','totalmember']));
     }
 
     /**

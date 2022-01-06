@@ -14,6 +14,11 @@
             {{ $member->fname.' '.$member->lname }}
             <br><a href="{{ route('member.edit',$member->id) }}" class="btn btn-sm btn-success text-left">Edit Member</a>
         </h2>
+        <div class="pageNo d-print-none text-center">
+            <a href="{{ ($member->id>1)? $member->id-1:$member->id }}"><span data-feather="arrow-left-circle" class="small text-dark"></span></a>
+            <span class="text-dark">{{$member->id}}</span>
+            <a href="{{ ($member->id<$totalmember) ? $member->id+1:$member->id }}"><span data-feather="arrow-right-circle" class="small text-dark"></span></a>
+        </div>
 
     </div>
 
@@ -63,6 +68,8 @@
 
         </tbody>
     </table>
+
+
 
 
 @endsection
