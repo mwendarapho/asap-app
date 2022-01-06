@@ -13,6 +13,7 @@ use App\Http\Traits\MemberTrait;
 use Maatwebsite\Excel\Facades\Excel;
 
 
+
 class InvoiceController extends Controller
 {
     use MemberTrait;
@@ -99,7 +100,21 @@ class InvoiceController extends Controller
      */
     public function show(Invoice $invoice)
     {
+        //dd($invoice->id);
         //DB::enableQueryLog();
+    
+        $invoice_data=DB::table('invoices')
+        ->select('member_id','invoice_date')
+        ->where('id', '=', $invoice->id)
+        ->get();
+
+        $member_id=$invoice_data[0]->member_id;
+        $invoice_date=$invoice_data[0]->invoice_date;
+              
+
+        $data=$this->statement($invoice_date, $member_id);
+        $transactions=$data->transactions;
+        $balBF=$data->balBF;
 
         $totalinvoice = Invoice::count();
         $transactions=[];
@@ -113,7 +128,7 @@ class InvoiceController extends Controller
 
 
 
-        return view('invoices.show', compact(['invoice', 'items', 'totalinvoice','transactions', 'balBF','dateRange']));
+        return view('invoices.show', compact(['invoice', 'items', 'totalinvoice','transactions','balBF']));
         //$log = DB::getQueryLog();
         //dump($log);
     }

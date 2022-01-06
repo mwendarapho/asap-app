@@ -2,7 +2,7 @@
 
 namespace App\Http\Traits;
 
-
+use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 
 
@@ -129,5 +129,68 @@ trait MemberTrait
                     ";
         return DB::select(DB::raw($query), ['date' => $date]);
     }
+
+    public function statement($to_date, $member_id)
+    {
+        //$to_date=Carbon::parse($to_date)->subYear(1)->format('Y-m-d');
+        $from_date =Carbon::parse($to_date)->subYear(3)->format('Y-m-d');
+        
+        //dd($from_date);
+
+        //$dateRange=['to_date'=>$to_date,'from_date'=>$from_date];
+
+
+         //dd($balBF=$this->balanceBroughtForward($from_date,$member_id));
+
+        $balBF = $this->balanceBroughtForward($from_date, $member_id);
+
+        $transactions = "select  docno, member_id,date,T7.fname,T7.lname,
+                        sum(case when doctype = 'INV' then amount else 0 end) owed,
+                        sum(case when doctype = 'RCT' then amount else 0 end) paid,
+                        sum(case when doctype = 'CRD' then amount else 0 end) credit
+                        from
+                        (
+                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
+                        from invoices T1 join items T2 on T1.id=T2.invoice_id
+                        group by T2.invoice_id
+                        union all
+                        select T3.id as docno,T3.member_id, T3.pay_date as date,  T3.amount,'RCT' as doctype
+                        from payments T3
+                        union all
+                        select T5.id as docno, T5.member_id,T5.credit_date as date, T5.amount, 'CRD' as doctype
+                        from creditnotes T5
+                        ) T4
+                        join members T7 on T4.member_id=T7.id";
+        if ($member_id == 000) {
+
+            $transaction1 = " WHERE date >= :from_date
+                            and   date <= :to_date GROUP BY T4.docno,T4.member_id,T4.date order by T4.member_id, T4.date";
+
+            $transactions .= $transaction1;
+
+        } else {
+            $transaction1 = " WHERE T4.member_id=:member_id AND date >= :from_date
+                            and   date <= :to_date GROUP BY T4.docno order by T4.date";
+
+            $transactions .= $transaction1;
+        }
+
+        // DB::enableQueryLog();
+        if ($member_id == 000) {
+            $transactions = DB::select(DB::raw($transactions), ['to_date' => $to_date, 'from_date' => $from_date]);
+
+        } else {
+            $transactions = DB::select(DB::raw($transactions), ['to_date' => $to_date, 'from_date' => $from_date, 'member_id' => $member_id]);
+
+        }
+        // $log = DB::getQueryLog();
+        //dump($log);
+        //dd($transactions);
+
+
+
+        return view('statements.member_five_year_balance', compact(['transactions', 'balBF']));
+    }
+
 
 }

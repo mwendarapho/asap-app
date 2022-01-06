@@ -170,6 +170,7 @@
                     </div>
                 </div>--}}
                 <hr>
+                @include('statements.member_five_year_balance')
                 <div class="address p-2">
                     <table class="table table-borderless">
                         <tbody>
