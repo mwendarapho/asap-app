@@ -33,7 +33,6 @@ class PaymentController extends Controller
 
     public function statement(Request $request)
     {
-//dd($request->member_id);
         $from_date = $request->from_date;
         $to_date = $request->to_date;
         $member_id = $request->member_id;

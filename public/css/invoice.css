@@ -26,3 +26,21 @@ hr {
     font-weight:700;
 }
 
+.card{
+    background-color: #fff;
+    margin-left: 100px;
+   
+    
+}
+
+@media print{
+    .card{
+        height:95vh;
+        width:100%;
+        border-left: none;
+        border-right: none;
+    }
+    .inv{
+        font-size:50px;
+    }
+}
