@@ -24,7 +24,7 @@
             <div class="card">
                 <table class="table">
                     <tr>
-                        <td class="text-center inv" colspan="3"> Tax Invoice</td>
+                        <td class="text-center inv" colspan="3"> Subscription Invoice</td>
                     </tr>
                     <tr>
                         <td class="text-center">Invoice No</td>
