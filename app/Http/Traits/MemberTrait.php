@@ -132,9 +132,11 @@ trait MemberTrait
 
     public function memberSummaryStatement($to_date, $member_id)
     {
+
+        $to_date=Carbon::parse($to_date)->addYear(1)->format('Y-m-d');
         
-        $from_date =Carbon::parse($to_date)->subYear(3)->format('Y-m-d');
-        $balBF = $this->balanceBroughtForward($from_date, $member_id);
+        $from_date =Carbon::parse($to_date)->subYear(4)->format('Y-m-d');
+        $balBF = $this->balanceBroughtForward($to_date, $member_id);
 
         $transactions = "select  docno, member_id,date,T7.fname,T7.lname,
                         sum(case when doctype = 'INV' then amount else 0 end) owed,
@@ -142,7 +144,7 @@ trait MemberTrait
                         sum(case when doctype = 'CRD' then amount else 0 end) credit
                         from
                         (
-                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
+                        select T1.id as docno,T1.member_id,T1.invoice_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
                         from invoices T1 join items T2 on T1.id=T2.invoice_id
                         group by T2.invoice_id
                         union all
