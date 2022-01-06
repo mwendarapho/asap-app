@@ -144,7 +144,7 @@ trait MemberTrait
                         sum(case when doctype = 'CRD' then amount else 0 end) credit
                         from
                         (
-                        select T1.id as docno,T1.member_id,T1.invoice_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
+                        select T1.id as docno,T1.member_id,T1.due_date as date, sum(T2.qty*T2.amount) as amount,'INV' as doctype
                         from invoices T1 join items T2 on T1.id=T2.invoice_id
                         group by T2.invoice_id
                         union all

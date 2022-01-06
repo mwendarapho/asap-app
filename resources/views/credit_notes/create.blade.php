@@ -41,16 +41,7 @@
                                 </div>
                             </div>
 
-                            <div class="form-group row">
-                                <label for="member_id"
-                                       class="col-md-4 col-form-label text-md-right">{{ __('Member') }}
-                                </label>
-
-
-                            </div>
-
-
-
+                        
                             <!--Items lists start-->
 
                             <div class="row">
@@ -105,7 +96,7 @@
                             <div class="form-group row mb-0">
                                 <div class="col-md-12 text-md-right">
                                     <button type="submit" class="btn btn-secondary" id="submit">
-                                        {{ __('Save Invoice') }}
+                                        {{ __('Save Credit Note') }}
                                     </button>
                                 </div>
                             </div>
