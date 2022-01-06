@@ -130,18 +130,10 @@ trait MemberTrait
         return DB::select(DB::raw($query), ['date' => $date]);
     }
 
-    public function statement($to_date, $member_id)
+    public function memberSummaryStatement($to_date, $member_id)
     {
-        //$to_date=Carbon::parse($to_date)->subYear(1)->format('Y-m-d');
-        $from_date =Carbon::parse($to_date)->subYear(3)->format('Y-m-d');
         
-        //dd($from_date);
-
-        //$dateRange=['to_date'=>$to_date,'from_date'=>$from_date];
-
-
-         //dd($balBF=$this->balanceBroughtForward($from_date,$member_id));
-
+        $from_date =Carbon::parse($to_date)->subYear(3)->format('Y-m-d');
         $balBF = $this->balanceBroughtForward($from_date, $member_id);
 
         $transactions = "select  docno, member_id,date,T7.fname,T7.lname,
@@ -187,9 +179,9 @@ trait MemberTrait
         //dump($log);
         //dd($transactions);
 
+        return  compact(['transactions', 'balBF']);
 
-
-        return view('statements.member_five_year_balance', compact(['transactions', 'balBF']));
+       // return view('statements.member_five_year_balance', compact(['transactions', 'balBF']));
     }
 
 

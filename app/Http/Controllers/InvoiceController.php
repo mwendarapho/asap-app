@@ -112,14 +112,13 @@ class InvoiceController extends Controller
         $invoice_date=$invoice_data[0]->invoice_date;
               
 
-        $data=$this->statement($invoice_date, $member_id);
-        $transactions=$data->transactions;
-        $balBF=$data->balBF;
+        $data=$this->memberSummaryStatement($invoice_date, $member_id);
+
+        $transactions=$data['transactions'];
+        $balBF=$data['balBF'];
 
         $totalinvoice = Invoice::count();
-        $transactions=[];
-        $balBF=[];
-        $dateRange=[];
+    
 
         $items = DB::table('items')
             ->select('qty', 'description', 'amount')
