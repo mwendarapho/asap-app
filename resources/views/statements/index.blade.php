@@ -13,12 +13,8 @@
     <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
         Launch demo modal
     </button>--}}
-    <div class="col-md-12 text-center d-none d-print-block">
-        <h2>Test Oraganization </h2>
-        <h3>P.o Box 000 </h3>
-        <p>someone@test.org | +254 123456 </p>
-        <h3>Statement</h3>
-    </div>
+   @include('layouts.print_page_header')
+   <h3>Statement</h3>
     <table class="table">
         <tbody>
         <tr class="text-black-50">
@@ -113,29 +109,6 @@
 
 </div>
 
-
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Select Date &amp; Member</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                ...
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 @stop
 @section('scripts')
     <!-- DataTables -->
@@ -148,7 +121,9 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-            $('#statement').DataTable();
+            $('#statement').DataTable({
+                "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+            });
         } );
 
     </script>

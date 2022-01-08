@@ -20,8 +20,7 @@
                 <a href="{{ ($invoice->id<$totalinvoice) ? $invoice->id+1:$invoice->id }}"><span data-feather="arrow-right-circle" class="small text-white"></span></a>
             </div>
 
-
-            <div class="card">
+            <div class="card">               
                 <table class="table">
                     <tr>
                         <td class="text-center inv" colspan="3"> Subscription Invoice</td>
@@ -44,12 +43,12 @@
                             <tr class="add">
                                 <td>To</td>
                                 <td>From</td>
-                            </tr>
+                                </tr>
                             <tr class="content">
                                 <td class="font-weight-bold">{{$invoice->member->fname}} {{$invoice->member->lname}}
                                     <br>{{$invoice->member->address}}<br>{{$invoice->member->email}}<br>{{$invoice->member->phone}}
                                 </td>
-                                <td class="font-weight-bold"> {{env('ORG_NAME')}} <br>{{ env('ORG_ADDRESS') }}, {{env('ORG_CITY')}}<br>{{ env('ORG_PHONE') }} </td>
+                                <td class="font-weight-bold"> {{env('ORG_NAME')}}<br>{{ env('ORG_ADDRESS') }}, {{env('ORG_CITY')}}<br>{{ env('ORG_PHONE') }} </td>
                             </tr>
                         </tbody>
                     </table>
@@ -115,6 +114,7 @@
                     </table>
                 </div>
             </div>
+            <div class=" printed_at d-none d-print-block"><p>{{ Carbon\Carbon::now() }}</p></div>
         </div>
     </div>
 </div>

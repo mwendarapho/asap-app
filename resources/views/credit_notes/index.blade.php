@@ -85,7 +85,9 @@ $balance=0;
     <script type="text/javascript">
 
         $(document).ready(function() {
-            $('#creditnote').DataTable();
+            $('#creditnote').DataTable({
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+            });
         } );
 
     </script>

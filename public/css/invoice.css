@@ -1,9 +1,14 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Maven+Pro&display=swap');
 
+*{
+    margin:0;
+}
+
 body {
     font-family: 'Maven Pro', sans-serif;
     background-color: #f12369
+    
 }
 
 hr {
@@ -19,7 +24,7 @@ hr {
 }
 
 .content {
-    font-size: 14px
+    font-size: 1rem;
 }
 .inv{
     font-size:30px;
@@ -28,17 +33,30 @@ hr {
 
 .card{
     background-color: #fff;
-    margin-left: 100px;
+    
    
     
 }
 
+.printed_at p{
+    margin-left:100px;
+    margin-top: 3px;
+    
+    
+}
+
 @media print{
+
+    body {
+        background-color: #fff;
+        
+    }
     .card{
-        height:95vh;
+        height:92vh;
         width:100%;
         border-left: none;
         border-right: none;
+        margin-left:0;
     }
     .inv{
         font-size:50px;

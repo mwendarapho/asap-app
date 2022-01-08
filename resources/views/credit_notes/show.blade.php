@@ -11,15 +11,9 @@
 
     <div class="container-fluid">
         <div class="row ">
-            <div class="col-md-12 text-center">
-                <div class="d-none d-print-block">
-                    <h2>{{env('ORG_NAME')}} </h2>
-                    <h3>{{env('ORG_ADDRESS')}} </h3>
-                    <p>{{env('ORG_EMAIL').' | '.env('ORG_PHONE')}} </p>
-                </div>
-
-                <h3>Credit Note</h3>
-
+            @include('layouts.print_page_header')
+            <h3>Credit Note</h3>
+         
                 <table class="table">
                     <tr>
                         <td class="text-left">Bill To</td>
@@ -38,7 +32,7 @@
                     </tr>
                 </table>
 
-            </div>
+            
         </div>
         <div class="row">
             <div class="col-md-12">

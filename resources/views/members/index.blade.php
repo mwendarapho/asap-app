@@ -72,6 +72,7 @@
             let getdata ="<?php  echo route($members['link']); ?>";
 
             $('#membersTable').DataTable({
+                "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
                 processing: true,
                 serverSide: true,
 
