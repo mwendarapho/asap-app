@@ -2,7 +2,7 @@
 @extends('layouts.app')
 @section('styles')
 
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.11.2/b-2.0.0/datatables.min.css"/>
 @endsection
 @section('content')
 <div class="container py-3">
@@ -25,7 +25,7 @@
         <tbody>
         @foreach($invoices as $invoice)
             <tr>
-                <td><a href="invoice/{{ $invoice->docno }}"><span data-feather="arrow-right-circle" class="small text-success"></span></a>{{ $invoice->docno }} </td>
+                <td><a href="invoice/{{ $invoice->docno }}"><span data-feather="arrow-right-circle" class="small text-success"></span></a> {{ $invoice->docno }} </td>
                 <td>{{ $invoice->fname.' '.$invoice->lname }}</td>
                 <td>{{$invoice->inv_date }}</td>
                 <td>{{ $invoice->date }}</td>
@@ -52,8 +52,8 @@
 
         $(document).ready(function() {
             $('#invoice').DataTable({
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
-         
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                      
             });
             
         } );

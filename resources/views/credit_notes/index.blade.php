@@ -86,7 +86,11 @@ $balance=0;
 
         $(document).ready(function() {
             $('#creditnote').DataTable({
-                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+                "lengthMenu": [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
+                
+                buttons: [
+                    'copy', 'excel', 'pdf'
+                ] 
             });
         } );
 

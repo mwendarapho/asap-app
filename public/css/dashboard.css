@@ -106,3 +106,13 @@ body {
 
 
 
+@media print{
+    *{
+        color: black;
+    }
+    a{
+        text-decoration: none;
+    }
+}
+
+

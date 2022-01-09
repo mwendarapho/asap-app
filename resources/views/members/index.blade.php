@@ -15,7 +15,7 @@
 
 
 
-<table class="table table-hover table-responsive-sm" id="membersTable">
+<table class="table table-hover table-sm" id="membersTable">
     <thead>
     <tr>
         <th class="d-print-none"></th>
@@ -73,6 +73,8 @@
 
             $('#membersTable').DataTable({
                 "lengthMenu": [ [10, 25, 50, 100, -1], [10, 25, 50, 100, "All"] ],
+               
+                                            
                 processing: true,
                 serverSide: true,
 
