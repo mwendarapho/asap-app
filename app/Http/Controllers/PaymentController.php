@@ -22,11 +22,11 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        $payments = Payment::with('member')
-            ->with('paymode')
+        $payments = Payment::with('paymode')
+            ->with('member')
             ->oldest('pay_date', 'asc')
             ->orderBy('member_id')
-            ->get();           
+            ->paginate();           
         return view('receipts.index', compact('payments'));
     }
 
