@@ -27,7 +27,7 @@ class PaymentController extends Controller
             ->oldest('pay_date', 'asc')
             ->orderBy('member_id')
             ->get();
-
+           
         return view('receipts.index', compact('payments'));
     }
 
