@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Traits\MemberTrait;
-use App\Models\Member;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\DataTables;
 use App\DataTables\MemberDataTable;
