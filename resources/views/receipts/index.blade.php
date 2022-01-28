@@ -39,6 +39,7 @@ $balance=0;
                 <tbody>
                     @foreach($payments as $payment)
 
+                
                     <tr>
                         <td>{{$payment->pay_date}}</td>
                         <td>
@@ -48,8 +49,8 @@ $balance=0;
                         </td>
                         
 
-                        <td>{{ $payment->member->lname.' '.$payment->member->fname }}</td>
-                        <td>{{ $payment->paymode->name }}</td>
+                        <td>{{ $payment->fname.' '.$payment->lname }}</td>
+                        <td>{{ $payment->name }}</td>
                         <td>{{ $payment->ref }}</td>
                         <td>{{ number_format($payment->amount, 2) }}</td>
                         <td>{{ number_format($balance+=$payment->amount,2) }}</td>

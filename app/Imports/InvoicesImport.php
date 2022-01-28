@@ -21,7 +21,7 @@ class InvoicesImport implements ToCollection
     {
         foreach ($rows as $row)
         {
-            if($row[5]!='') {
+           // if($row[5]!='') {
                 DB::transaction(function () use ($row) {
                     $data['member_id'] = $row[0];
                     $data['invoice_date'] = Carbon::parse($row[1])->format('Y-m-d');
@@ -36,7 +36,7 @@ class InvoicesImport implements ToCollection
                     $data['invoice_id'] = $id;
                     Item::create($data);
                 }, 3);
-            }
+            //}
 
         }
 

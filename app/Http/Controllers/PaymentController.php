@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\InvoicesImport;
+
 use App\Imports\PaymentImport;
 use App\Models\Payment;
 use Illuminate\Http\Request;
@@ -21,12 +21,15 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $payments = Payment::with('paymode')
-            ->with('member')
-            ->oldest('pay_date', 'asc')
-            ->orderBy('member_id')
-            ->paginate();           
+    {    
+        
+        $payments=DB::table('payments AS T1')
+                    ->join('members AS T2','T2.id','=','T1.member_id')
+                    ->join('paymodes AS T3','T3.id','=','T1.paymode_id')
+                    
+                    ->select('pay_date','name','amount','fname','lname','ref','T1.id')
+                    ->get()->toArray();
+                    
         return view('receipts.index', compact('payments'));
     }
 
@@ -223,8 +226,12 @@ class PaymentController extends Controller
 
     public function fileImport(Request $request)
     {
-        Excel::import(new PaymentImport, $request->file('file')->store('temp'));
-        return back()->with(['message'=>'Imported successfully']);
+        if($request->hasFile('file')){
+            Excel::import(new PaymentImport, $request->file('file')); //->store('temp')
+            return back()->with(['message'=>'Imported successfully']);
+        }
+        return back()->with(['message'=>'Add file to import']);
+        
     }
 
 }

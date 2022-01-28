@@ -37,7 +37,7 @@
                     </tr>
                 </table>
 
-                <div class="table-responsive p-2">
+                <div class="table p-1">
                     <table class="table table-borderless">
                         <tbody>
                             <tr class="add">
@@ -102,6 +102,7 @@
                 <div class="address p-2">
                     <table class="table table-borderless">
                         <tbody>
+                          
                             <tr class="add">
                                 <td>Bank Details</td>
                             </tr>
@@ -109,6 +110,14 @@
                                 <td> Bank Name : {{env('ORG_BANK')}} <br> Swift Code : {{ env('ORG_BANK_SWIFT_CODE') }} <br> Account Holder : {{env('ORG_ACCOUNT_NAME')}}
                                     <br> Account Number : {{env('ORG_ACCOUNT_NO')}} <br>
                                 </td>
+                                <td>
+                                    M-pesa Pay Bill No: {{env('ORG_PAYBILL_NO')}}<br>
+                                    Account: {{env('ORG_PAYBILL_ACCOUNT')}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Make all cheques payable to {{env('ORG_NAME')}}</td>
+                                <td>If you have any questions concerning this invoice, Please contact the office.</td>
                             </tr>
                         </tbody>
                     </table>

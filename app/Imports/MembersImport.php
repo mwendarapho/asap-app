@@ -3,11 +3,14 @@
 namespace App\Imports;
 
 use App\Models\Member;
+use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\ToModel;
+use Maatwebsite\Excel\Concerns\WithProgressBar;
 
-
-class MembersImport implements ToModel
+class MembersImport implements ToModel, WithProgressBar
 {
+    use Importable;
+
     /**
     * @param array $row
     *
